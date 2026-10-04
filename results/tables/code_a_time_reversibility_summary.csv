@@ -1,0 +1,4 @@
+"sample","pairs","rejected_1pct","rejected_5pct","share_rejected_1pct","share_rejected_5pct"
+"DJ30 (all 435 pairs)",435,27,66,0.0620689655172414,0.151724137931034
+"DJ30 Table 1 (10 pairs, common sample)",10,3,4,0.3,0.4
+"Mag7 (10 pairs)",10,1,1,0.1,0.1

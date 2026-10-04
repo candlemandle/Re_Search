@@ -1,0 +1,8 @@
+# raw downloads are recreated by scripts/01_download_data.R
+data/raw/
+.Rhistory
+.RData
+.Rproj.user/
+.DS_Store
+# smoke-mode outputs (scripts write full results to results/)
+results/smoke/
