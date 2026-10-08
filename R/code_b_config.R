@@ -11,8 +11,17 @@ code_b_config <- function(mode = c("smoke", "full")) {
     # --- empirical forecasts (tables 2, 3, 15-19) ---------------------------
     delta = 1 / 252, # same daily step as code A
     # "two-year" rolling window. 500 days because both samples have exactly 500
-    # common days before the first forecast date of the paper (2007-01-03 and 2016-03-29)
+    # common days before the first forecast date of the paper (2007-01-03 and 2016-03-29).
+    # on the trading calendar the same 500 rows are 500 trading days (2 x 252 = 504)
     window = 500L,
+    # time convention of origins, windows and h (review B1, see code_b_calendars()):
+    #   "trading"    primary: h = trading days of the panel calendar, targets fixed
+    #                at the origin, a missing target is dropped for all models
+    #   "common_obs" historical replication mode: rows = days on which all assets of
+    #                the set are observed (a future missing day moves the target)
+    calendar = "trading",
+    calendars = c("trading", "common_obs"), # conventions computed by scripts 06 and 07
+    min_window_coverage = 0.9, # trading calendar: observed share of the window
     horizons = c(1L, 2L, 3L, 4L, 5L, 10L, 15L, 20L),
     origin_step = 1L, # forecast every day. smoke mode skips days
     dj30_assets = c("AAPL", "ALD", "AMGN", "AXP", "BA"),
@@ -40,9 +49,9 @@ code_b_config <- function(mode = c("smoke", "full")) {
   )
 
   if (mode == "smoke") {
-    cfg$origin_step <- 40L
+    cfg$origin_step <- 500L
     cfg$mcs_boot <- 500L
-    cfg$sim_reps <- 500L
+    cfg$sim_reps <- 50L
     cfg$fig6_dims <- c(1:10, 20, 50, 100)
   }
   cfg
@@ -59,7 +68,9 @@ code_b_cores <- function() {
   if (.Platform$OS.type == "windows") return(1L)
   env <- Sys.getenv("MFBM_CORES", "")
   if (nzchar(env)) return(as.integer(env))
-  max(1L, parallel::detectCores() - 1L)
+  detected <- parallel::detectCores()
+  if (is.na(detected)) return(1L)
+  max(1L, detected - 1L)
 }
 
 # forked workers plus multithreaded openblas overload the cpu (each window became
@@ -74,6 +85,7 @@ code_b_relaunch_single_thread <- function(script) {
 
 # load code A (estimators, covariances, simulator, data) and the code B files
 source_code_b <- function(root = ".") {
+  options(code_b.source_root = normalizePath(root))
   source(file.path(root, "R", "code_a_config.R"))
   source_code_a(root)
   for (f in c("R/forecast_mfbm.R", "R/forecast_har.R", "R/rolling_window.R", "R/metrics.R")) {

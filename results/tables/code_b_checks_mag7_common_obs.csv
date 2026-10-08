@@ -1,0 +1,2 @@
+"calendar","n_models","n_rows","same_test_dates","no_lookahead","no_na_inf","positive_forecasts","unique_keys","positive_actuals","same_actuals"
+"common_obs",19,331588,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE

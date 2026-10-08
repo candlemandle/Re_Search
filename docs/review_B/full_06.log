@@ -1,0 +1,73 @@
+[2026-10-08 16:00:52] 06 empirical forecasts DJ30, mode = full, cores = 11 
+[2026-10-08 16:00:52] calendar = trading (primary) 
+[2026-10-08 16:00:52]   trading calendar: 10 of 4519 origins skipped (asset_missing_at_origin = 10) 
+[2026-10-08 16:00:52]   fBm loaded from checkpoint 
+[2026-10-08 16:00:52]   HAR loaded from checkpoint 
+[2026-10-08 16:00:52]   LHAR loaded from checkpoint 
+[2026-10-08 16:00:52]   bfBm loaded from checkpoint 
+[2026-10-08 16:00:52]   VHAR2 loaded from checkpoint 
+[2026-10-08 16:00:52]   VHARF2 loaded from checkpoint 
+[2026-10-08 16:00:52]   VLHAR2 loaded from checkpoint 
+[2026-10-08 16:00:53]   mfBm3 loaded from checkpoint 
+[2026-10-08 16:00:53]   VHAR3 loaded from checkpoint 
+[2026-10-08 16:00:53]   VHARF3 loaded from checkpoint 
+[2026-10-08 16:00:53]   VLHAR3 loaded from checkpoi[202[2026-10-08 16:06:00]   mfBm4   4509 origins, 307.1 s 
+[2026-10-08 16:06:00]   VHAR4 loaded from checkpoint 
+[2026-10-08 16:06:00]   VHARF4 loaded from checkpoint 
+[2026-10-08 16:06:00]   VLHAR4 loaded from checkpoint 
+[2026-10-08 16:11:38]   mfBm5   4509 origins, 337.8 s 
+[2026-10-08 16:11:40]   VHAR5   4509 origins, 2.2 s 
+[2026-10-08 16:11:42]   VHARF5  4509 origins, 1.7 s 
+[2026-10-08 16:11:44]   VLHAR5  4509 origins, 2.2 s 
+[2026-10-08 16:11:44] all models: 10.9 min 
+[2026-10-08 16:11:46] wrote results/tables/code_b_checks_dj30.csv 
+[2026-10-08 16:12:38] wrote results/tables/code_b_dj30_tables_vs_paper.csv 
+[2026-10-08 16:12:38] wrote results/tables/code_b_dj30_original_vs_ours.csv 
+[2026-10-08 16:12:38] wrote results/tables/code_b_table02_dj30.csv 
+[2026-10-08 16:12:38] wrote results/tables/code_b_table03_dj30.csv 
+[2026-10-08 16:12:38] wrote results/tables/code_b_table15_dj30.csv 
+[2026-10-08 16:12:38] wrote results/tables/code_b_table16_dj30.csv 
+[2026-10-08 16:12:38] wrote results/tables/code_b_table18_dj30.csv 
+[2026-10-08 16:12:38] [trading] mfBm5 better than fBm (MSFE, full period): 8 of 8 horizons 
+[2026-10-08 16:12:38] [trading] same direction as the paper: 74 of 80 
+[2026-10-08 16:12:38] calendar = common_obs (sensitivity / replication mode) 
+[2026-10-08 16:12:48]   fBm     4508 origins, 10.0 s 
+[2026-10-08 16:12:50]   HAR     4508 origins, 1.6 s 
+[2026-10-08 16:12:52]   LHAR    4508 origins, 1.7 s 
+[2026-10-08 16:13:33]   bfBm    4508 origins, 41.6 s 
+[2026-10-08 16:13:35]   VHAR2   4508 origins, 1.7 s 
+[2026-10-08 16:13:37]   VHARF2  4508 origins, 1.7 s 
+[2026-10-08 16:13:38]   VLHAR2  4508 origins, 1.7 s 
+[2026-10-08 16:14:56]   mfBm3   4508 origins, 78.0 s 
+[2026-10-08 16:14:58]   VHAR3   4508 origins, 1.8 s 
+[2026-10-08 16:15:00]   VHARF3  4508 origins, 1.6 s 
+[2026-10-08 16:15:02]   VLHAR3  4508 origins, 1.9 s 
+[2026-10-08 16:17:58]   mfBm4   4508 origins, 176.4 s 
+[2026-10-08 16:18:00]   VHAR4   4508 origins, 2.0 s 
+[2026-10-08 16:18:02]   VHARF4  4508 origins, 1.7 s 
+[2026-10-08 16:18:04]   VLHAR4  4508 origins, 2.0 s 
+[2026-10-08 16:23:38]   mfBm5   4508 origins, 334.0 s 
+[2026-10-08 16:23:40]   VHAR5   4508 origins, 2.1 s 
+[2026-10-08 16:23:41]   VHARF5  4508 origins, 1.6 s 
+[2026-10-08 16:23:44]   VLHAR5  4508 origins, 2.2 s 
+[2026-10-08 16:23:44] all models: 11.1 min 
+[2026-10-08 16:23:46] wrote results/tables/code_b_checks_dj30_common_obs.csv 
+[2026-10-08 16:24:36] wrote results/tables/code_b_dj30_tables_vs_paper_common_obs.csv 
+[2026-10-08 16:24:36] wrote results/tables/code_b_dj30_original_vs_ours_common_obs.csv 
+[2026-10-08 16:24:36] wrote results/tables/code_b_table02_dj30_common_obs.csv 
+[2026-10-08 16:24:36] wrote results/tables/code_b_table03_dj30_common_obs.csv 
+[2026-10-08 16:24:36] wrote results/tables/code_b_table15_dj30_common_obs.csv 
+[2026-10-08 16:24:36] wrote results/tables/code_b_table16_dj30_common_obs.csv 
+[2026-10-08 16:24:36] wrote results/tables/code_b_table18_dj30_common_obs.csv 
+[2026-10-08 16:24:36] [common_obs] mfBm5 better than fBm (MSFE, full period): 8 of 8 horizons 
+[2026-10-08 16:24:36] [common_obs] same direction as the paper: 76 of 80 
+[2026-10-08 16:24:36] wrote results/tables/code_b_calendar_sensitivity_dj30.csv 
+[2026-10-08 16:24:37] wrote results/tables/code_b_calendar_keys_dj30.csv 
+[2026-10-08 16:24:37] wrote results/tables/code_b_provenance_06.csv 
+null device 
+          1 
+null device 
+          1 
+null device 
+          1 
+[2026-10-08 16:24:37] 06 done 

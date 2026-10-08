@@ -7,8 +7,9 @@
 # assets are added in the paper order AAPL, ALD, AMGN, AXP, BA.
 #
 # run from the project root (needs data/processed/dj30_logvol.csv from code A):
-#   Rscript scripts/06_run_empirical_forecasts.R smoke   (every 40th day, results/smoke/)
+#   Rscript scripts/06_run_empirical_forecasts.R smoke   (every 500th day, results/smoke/)
 #   Rscript scripts/06_run_empirical_forecasts.R full    (every day as in the paper)
+# both time conventions of review B1 are computed (cfg$calendars); see code_b_calendars()
 
 source("R/code_b_config.R")
 code_b_relaunch_single_thread("scripts/06_run_empirical_forecasts.R")
@@ -19,19 +20,12 @@ code_b_set_mode(mode)
 cores <- code_b_cores()
 code_b_log("06 empirical forecasts DJ30, mode = ", mode, ", cores = ", cores)
 
-# --- forecasts -----------------------------------------------------------------
+# --- forecasts and tables, for both time conventions (review B1) ----------------
+# cfg$calendar ("trading") is the primary convention and keeps the historical file
+# names; the other one ("common_obs", the historical replication mode) gets a suffix.
 
 panel <- load_logvol_panel("dj30")
-t0 <- Sys.time()
-fc <- run_all_models(panel, cfg$dj30_assets, cfg, cores, checkpoint = "dj30")
-code_b_log(sprintf("all models: %.1f min", as.numeric(difftime(Sys.time(), t0, units = "mins"))))
-
-dir.create(code_b_results("forecasts"), recursive = TRUE, showWarnings = FALSE)
-saveRDS(fc, code_b_results("forecasts", "code_b_forecasts_dj30.rds"))
-code_b_write(check_forecasts(fc), "code_b_checks_dj30.csv")
-
-# --- tables --------------------------------------------------------------------
-
+paper <- utils::read.csv("docs/paper_values/code_b_forecast_tables.csv")
 specs <- rbind(
   data.frame(table = "Table 2", panel = c("full", "period1", "period2"), class = "mfbm",
              period = c("full", "period1", "period2"), metric = "MSFE"),
@@ -40,26 +34,49 @@ specs <- rbind(
   data.frame(table = "Table 18", panel = c("mfbm", "vhar", "vharf", "vlhar"),
              class = c("mfbm", "vhar", "vharf", "vlhar"), period = "full", metric = "QLIKE")
 )
-tabs <- paper_tables(fc, specs, cfg$dj30_periods, cfg$mcs_boot, cfg$mcs_block, cfg$seed)
+dir.create(code_b_results("forecasts"), recursive = TRUE, showWarnings = FALSE)
+fcs <- tabs_all <- list()
+for (cal in cfg$calendars) {
+  cfg_cal <- code_b_calendar_config(cfg, cal)
+  sfx <- code_b_calendar_suffix(cfg, cal)
+  code_b_log("calendar = ", cal, if (sfx == "") " (primary)" else " (sensitivity / replication mode)")
+  t0 <- Sys.time()
+  fc <- run_all_models(panel, cfg$dj30_assets, cfg_cal, cores, checkpoint = paste0("dj30_", cal))
+  code_b_log(sprintf("all models: %.1f min", as.numeric(difftime(Sys.time(), t0, units = "mins"))))
+  saveRDS(fc, code_b_results("forecasts", paste0("code_b_forecasts_dj30", sfx, ".rds")))
+  code_b_write(cbind(calendar = cal, check_forecasts(fc)), paste0("code_b_checks_dj30", sfx, ".csv"))
 
-paper <- utils::read.csv("docs/paper_values/code_b_forecast_tables.csv")
-cmp <- compare_with_paper(tabs, paper)
-code_b_write(cmp, "code_b_dj30_tables_vs_paper.csv")
-ovo <- original_vs_ours(cmp)
-code_b_write(ovo, "code_b_dj30_original_vs_ours.csv")
-
-# one wide file per paper table, easy to read and to put on slides
-for (tb in unique(tabs$table)) {
-  x <- tabs[tabs$table == tb, ]
-  wide <- do.call(rbind, lapply(split(x, x$panel), function(p) {
-    cbind(panel = p$panel[1], merge(to_wide(p, "value"), to_wide(p, "mcs_p"), sort = FALSE))
-  }))
-  code_b_write(wide, sprintf("code_b_table%02d_dj30.csv", as.integer(sub("Table ", "", tb))))
+  tabs <- paper_tables(fc, specs, cfg$dj30_periods, cfg$mcs_boot, cfg$mcs_block, cfg$seed)
+  tabs$calendar <- cal
+  cmp <- compare_with_paper(tabs, paper)
+  code_b_write(cmp, paste0("code_b_dj30_tables_vs_paper", sfx, ".csv"))
+  ovo <- original_vs_ours(cmp)
+  code_b_write(ovo, paste0("code_b_dj30_original_vs_ours", sfx, ".csv"))
+  # one wide file per paper table, easy to read and to put on slides
+  for (tb in unique(tabs$table)) {
+    x <- tabs[tabs$table == tb, ]
+    wide <- do.call(rbind, lapply(split(x, x$panel), function(p) {
+      cbind(panel = p$panel[1], calendar = cal, merge(to_wide(p, "value"), to_wide(p, "mcs_p"), sort = FALSE))
+    }))
+    code_b_write(wide, sprintf("code_b_table%02d_dj30%s.csv", as.integer(sub("Table ", "", tb)), sfx))
+  }
+  code_b_log("[", cal, "] mfBm5 better than fBm (MSFE, full period): ",
+             sum(ovo$ours < 1 & ovo$table == "Table 2" & ovo$panel == "full"), " of 8 horizons")
+  code_b_log("[", cal, "] same direction as the paper: ", sum(ovo$same_direction), " of ", nrow(ovo))
+  fcs[[cal]] <- fc
+  tabs_all[[cal]] <- tabs
 }
+if (all(c("trading", "common_obs") %in% names(fcs))) {
+  code_b_write(calendar_sensitivity(tabs_all, paper), "code_b_calendar_sensitivity_dj30.csv")
+  code_b_write(calendar_key_audit(fcs$trading, fcs$common_obs, panel$date), "code_b_calendar_keys_dj30.csv")
+}
+code_b_write(code_b_provenance("06_run_empirical_forecasts.R", "data/processed/dj30_logvol.csv", cfg),
+             "code_b_provenance_06.csv")
 
-code_b_log("mfBm5 better than fBm (MSFE, full period): ",
-           sum(ovo$ours < 1 & ovo$table == "Table 2" & ovo$panel == "full"), " of 8 horizons")
-code_b_log("same direction as the paper: ", sum(ovo$same_direction), " of ", nrow(ovo))
+# figures use the primary convention
+fc <- fcs[[cfg$calendar]]
+tabs <- tabs_all[[cfg$calendar]]
+ovo <- original_vs_ours(compare_with_paper(tabs, paper))
 
 # --- figures -------------------------------------------------------------------
 

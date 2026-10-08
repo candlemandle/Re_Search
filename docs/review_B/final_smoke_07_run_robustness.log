@@ -1,0 +1,68 @@
+[2026-10-08 16:42:08] 07 robustness, mode = smoke, cores = 11 
+[2026-10-08 16:42:08] calendar = trading (primary) 
+[2026-10-08 16:42:08]   fBm loaded from checkpoint 
+[2026-10-08 16:42:08]   HAR loaded from checkpoint 
+[2026-10-08 16:42:08]   LHAR loaded from checkpoint 
+[2026-10-08 16:42:08]   bfBm loaded from checkpoint 
+[2026-10-08 16:42:08]   VHAR2 loaded from checkpoint 
+[2026-10-08 16:42:08]   VHARF2 loaded from checkpoint 
+[2026-10-08 16:42:08]   VLHAR2 loaded from checkpoint 
+[2026-10-08 16:42:08]   mfBm3 loaded from checkpoint 
+[2026-10-08 16:42:08]   VHAR3 loaded from checkpoint 
+[2026-10-08 16:42:08]   VHARF3 loaded from checkpoint 
+[2026-10-08 16:42:08]   VLHAR3 loaded from checkpoint 
+[2026-10-08 16:42:08]   mfBm4 loaded from checkpoint 
+[2026-10-08 16:42:08]   VHAR4 loaded from checkpoint 
+[2026-10-08 16:42:08]   VHARF4 loaded from checkpoint 
+[2026-10-08 16:42:08]   VLHAR4 loaded from checkpoint 
+[2026-10-08 16:42:08]   mfBm5 loaded from checkpoint 
+[2026-10-08 16:42:08]   VHAR5 loaded from checkpoint 
+[2026-10-08 16:42:08]   VHARF5 loaded from checkpoint 
+[2026-10-08 16:42:08]   VLHAR5 loaded from checkpoint 
+[2026-10-08 16:42:08] wrote results/smoke/tables/code_b_checks_mag7.csv 
+[2026-10-08 16:42:09] wrote results/smoke/tables/code_b_mag7_tables_vs_paper.csv 
+[2026-10-08 16:42:09] wrote results/smoke/tables/code_b_mag7_original_vs_ours.csv 
+[2026-10-08 16:42:09] [trading] mag7 same direction as the paper: 32 of 64 
+[2026-10-08 16:42:09] calendar = common_obs (sensitivity / replication mode) 
+[2026-10-08 16:42:09]   fBm loaded from checkpoint 
+[2026-10-08 16:42:09]   HAR loaded from checkpoint 
+[2026-10-08 16:42:09]   LHAR loaded from checkpoint 
+[2026-10-08 16:42:09]   bfBm loaded from checkpoint 
+[2026-10-08 16:42:09]   VHAR2 loaded from checkpoint 
+[2026-10-08 16:42:09]   VHARF2 loaded from checkpoint 
+[2026-10-08 16:42:09]   VLHAR2 loaded from checkpoint 
+[2026-10-08 16:42:09]   mfBm3 loaded from checkpoint 
+[2026-10-08 16:42:09]   VHAR3 loaded from checkpoint 
+[2026-10-08 16:42:09]   VHARF3 loaded from checkpoint 
+[2026-10-08 16:42:09]   VLHAR3 loaded from checkpoint 
+[2026-10-08 16:42:09]   mfBm4 loaded from checkpoint 
+[2026-10-08 16:42:09]   VHAR4 loaded from checkpoint 
+[2026-10-08 16:42:09]   VHARF4 loaded from checkpoint 
+[2026-10-08 16:42:09]   VLHAR4 loaded from checkpoint 
+[2026-10-08 16:42:09]   mfBm5 loaded from checkpoint 
+[2026-10-08 16:42:09]   VHAR5 loaded from checkpoint 
+[2026-10-08 16:42:09]   VHARF5 loaded from checkpoint 
+[2026-10-08 16:42:09]   VLHAR5 loaded from checkpoint 
+[2026-10-08 16:42:09] wrote results/smoke/tables/code_b_checks_mag7_common_obs.csv 
+[2026-10-08 16:42:09] wrote results/smoke/tables/code_b_mag7_tables_vs_paper_common_obs.csv 
+[2026-10-08 16:42:09] wrote results/smoke/tables/code_b_mag7_original_vs_ours_common_obs.csv 
+[2026-10-08 16:42:09] [common_obs] mag7 same direction as the paper: 50 of 64 
+[2026-10-08 16:42:09] wrote results/smoke/tables/code_b_calendar_sensitivity_mag7.csv 
+[2026-10-08 16:42:09] wrote results/smoke/tables/code_b_calendar_keys_mag7.csv 
+[2026-10-08 16:42:09] wrote results/smoke/tables/code_b_provenance_07.csv 
+[2026-10-08 16:42:09] wrote results/smoke/tables/code_b_robust_dj30_subperiods.csv 
+[2026-10-08 16:42:09]   fBm loaded from checkpoint 
+[2026-10-08 16:42:09]   bfBm loaded from checkpoint 
+[2026-10-08 16:42:09]   mfBm3 loaded from checkpoint 
+[2026-10-08 16:42:09]   mfBm4 loaded from checkpoint 
+[2026-10-08 16:42:09]   mfBm5 loaded from checkpoint 
+[2026-10-08 16:42:09]   HAR loaded from checkpoint 
+[2026-10-08 16:42:09]   VHAR2 loaded from checkpoint 
+[2026-10-08 16:42:09]   VHAR3 loaded from checkpoint 
+[2026-10-08 16:42:09]   VHAR4 loaded from checkpoint 
+[2026-10-08 16:42:09]   VHAR5 loaded from checkpoint 
+[2026-10-08 16:42:09] wrote results/smoke/tables/code_b_checks_dj30_window250.csv 
+[2026-10-08 16:42:09] wrote results/smoke/tables/code_b_robust_dj30_window250.csv 
+[2026-10-08 16:42:09] wrote results/smoke/tables/code_b_robust_dj30_window500_matched.csv 
+[2026-10-08 16:42:09] wrote results/smoke/tables/code_b_robust_window_comparison_matched.csv 
+[2026-10-08 16:42:09] 07 done 

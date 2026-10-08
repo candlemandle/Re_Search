@@ -1,0 +1,19 @@
+"sample","table","panel","class","period","metric","model","h","calendar","variant","value","paper","rel_diff"
+"mag7","Table 17","vhar","vhar","full","MSFE","VHAR5",20,"trading","pipeline_filter_le0_to_window_min",1.2825774666616,2.5475,-0.496534851163258
+"mag7","Table 17","vhar","vhar","full","MSFE","VHAR5",20,"trading","exploratory_clip_to_window_range",1.26096923271879,2.5475,-0.505016984212447
+"mag7","Table 17","vhar","vhar","full","MSFE","VHAR5",20,"trading","exploratory_outside_range_to_window_mean",1.14582757384624,2.5475,-0.550214887597159
+"mag7","Table 17","vhar","vhar","full","MSFE","VHAR5",20,"trading","exploratory_no_filter",2.20889191841269,2.5475,-0.132917794538689
+"mag7","Table 17","vhar","vhar","full","MSFE","VHAR5",20,"trading","endpoint_500_pairs",1.23416099617654,2.5475,-0.515540335161321
+"mag7","Table 19","vhar","vhar","full","QLIKE","VHAR3",10,"trading","pipeline_filter_le0_to_window_min",0.339001163344933,0.1487,1.27976572525174
+"mag7","Table 19","vhar","vhar","full","QLIKE","VHAR3",10,"trading","exploratory_clip_to_window_range",0.0771835281172225,0.1487,-0.480944666326681
+"mag7","Table 19","vhar","vhar","full","QLIKE","VHAR3",10,"trading","exploratory_outside_range_to_window_mean",0.0726579179623626,0.1487,-0.511379166359364
+"mag7","Table 19","vhar","vhar","full","QLIKE","VHAR3",10,"trading","endpoint_500_pairs",0.0860461568402186,0.1487,-0.421343935170016
+"dj30","Table 18","vhar","vhar","full","QLIKE","VHAR4",15,"trading","pipeline_filter_le0_to_window_min",0.138325619707643,0.2896,-0.522356285539906
+"dj30","Table 18","vhar","vhar","full","QLIKE","VHAR4",15,"trading","exploratory_clip_to_window_range",0.107589905515476,0.2896,-0.628487895319489
+"dj30","Table 18","vhar","vhar","full","QLIKE","VHAR4",15,"trading","exploratory_outside_range_to_window_mean",0.0862390510897737,0.2896,-0.702213221375091
+"dj30","Table 18","vhar","vhar","full","QLIKE","VHAR4",15,"trading","endpoint_500_pairs",0.128669113767736,0.2896,-0.555700574006437
+"dj30","Table 3","full","vhar","full","MSFE","VHAR4",20,"trading","pipeline_filter_le0_to_window_min",1.69810156356934,1.9388,-0.124148151656001
+"dj30","Table 3","full","vhar","full","MSFE","VHAR4",20,"trading","exploratory_clip_to_window_range",1.68563986303309,1.9388,-0.130575684426917
+"dj30","Table 3","full","vhar","full","MSFE","VHAR4",20,"trading","exploratory_outside_range_to_window_mean",1.55907341078163,1.9388,-0.195856503619955
+"dj30","Table 3","full","vhar","full","MSFE","VHAR4",20,"trading","exploratory_no_filter",1.92008674153059,1.9388,-0.00965197981710941
+"dj30","Table 3","full","vhar","full","MSFE","VHAR4",20,"trading","endpoint_500_pairs",1.68292712247394,1.9388,-0.131974869778245

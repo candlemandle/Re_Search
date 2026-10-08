@@ -1,0 +1,29 @@
+[2026-10-08 15:29:20] 05 forecast simulations, mode = smoke, cores = 11 
+[2026-10-08 15:29:20] wrote results/smoke/tables/code_b_fig04_05_weights_msfe.csv 
+null device 
+          1 
+null device 
+          1 
+[2026-10-08 15:29:20] wrote results/smoke/tables/code_b_fig06_dimension.csv 
+[2026-10-08 15:29:20] wrote results/smoke/tables/code_b_fig06_limits.csv 
+[2026-10-08 15:29:20] figure 6 max |general - closed form| = 1.6e-14 
+null device 
+          1 
+[2026-10-08 15:29:20]   Table 8 rho=0: 0.2 s 
+[2026-10-08 15:29:21]   Table 8 rho=0.4: 0.1 s 
+[2026-10-08 15:29:21]   Table 8 rho=0.8: 0.2 s 
+[2026-10-08 15:29:21]   Table 9 H=(0.1;0.1): 0.2 s 
+[2026-10-08 15:29:21]   Table 9 H=(0.1;0.2): 0.1 s 
+[2026-10-08 15:29:21]   Table 9 H=(0.1;0.4): 0.2 s 
+[2026-10-08 15:29:22]   Table 10 Sigma1: 0.2 s 
+[2026-10-08 15:29:22]   Table 10 Sigma2: 0.4 s 
+[2026-10-08 15:29:30]   Table 11 rho=0: 8.4 s 
+[2026-10-08 15:29:40]   Table 11 rho=0.4: 9.3 s 
+[2026-10-08 15:29:40] wrote results/smoke/tables/code_b_tables08_11_simulations.csv 
+[2026-10-08 15:29:40] wrote results/smoke/tables/code_b_tables08_11_vs_paper.csv 
+[2026-10-08 15:29:40] theory vs paper: max |diff| = 4.96e-05 
+[2026-10-08 15:29:40] monte carlo vs paper: max |diff| / mc se = 4.85 
+[2026-10-08 15:29:40] 05 done 
+real 19.78
+user 170.89
+sys 8.46

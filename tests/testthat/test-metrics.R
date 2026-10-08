@@ -59,3 +59,23 @@ test_that("MCS p-values are reproducible and identical models do not break it", 
   expect_false(anyNA(p1))
   expect_error(mcs_pvalues(cbind(1:10, c(NA, 2:10))), "finite")
 })
+
+test_that("MCS is reported as unavailable when the block covers the whole sample", {
+  # with block >= n every circular resample is a rotation of the full sample, so all
+  # bootstrap means equal the sample mean; p-values of 1 would carry no information
+  set.seed(4)
+  L <- cbind(a = rchisq(9, 1), b = rchisq(9, 1) + 5)
+  idx <- block_bootstrap_index(9, 20)
+  expect_equal(sort(idx), 1:9)
+  expect_true(all(is.na(mcs_pvalues(L, B = 50, block = 20))))
+  expect_equal(mcs_status(9, 20), "unavailable_block_ge_n")
+  expect_equal(mcs_status(1, 1), "unavailable_n_lt_2")
+  expect_equal(mcs_status(21, 20), "ok")
+  fc <- data.frame(model = rep(c("a", "b"), each = 9), h = 1,
+                   target_date = rep(as.Date("2010-01-04") + 0:8, 2),
+                   forecast = 1, actual = c(L[, 1], L[, 2]))
+  tab <- evaluate_class(fc, c("a", "b"), c("2010-01-01", "2010-12-31"), "MSFE", B = 50, block = 20)
+  expect_true(all(is.na(tab$mcs_p)))
+  expect_equal(unique(tab$mcs_status), "unavailable_block_ge_n")
+  expect_equal(unique(tab$mcs_block), 20)
+})

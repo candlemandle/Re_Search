@@ -1,0 +1,56 @@
+     table model  h  period    n   ours  paper rel_diff top1_share top10_share
+1 Table 17 VHAR5 20    full 2173 1.2826 2.5475 -0.49653    0.03232      0.2267
+2 Table 19 VHAR3 10    full 2183 0.3390 0.1487  1.27977    0.74258      0.7912
+3 Table 18 VHAR4 15    full 4495 0.1383 0.2896 -0.52236    0.05831      0.2519
+4  Table 3 VHAR4 20    full 4490 1.6981 1.9388 -0.12415    0.03230      0.1664
+5  Table 2   fBm  1 period2 1075 0.4099 0.3842  0.06679    0.05941      0.3015
+  mean_without_top10 min_forecast n_filtered n_below_window_min
+1            0.99644    0.0055895         44                 75
+2            0.07113    0.0004851          3                 10
+3            0.10372    0.0062648         38                 56
+4            1.41868    0.0005587         45                 68
+5            0.28899    0.0804328         NA                 NA
+  n_rank_deficient
+1                0
+2                0
+3                0
+4                0
+5               NA
+      table model  h                                  variant   value  paper
+1  Table 17 VHAR5 20        pipeline_filter_le0_to_window_min 1.28258 2.5475
+2  Table 17 VHAR5 20         exploratory_clip_to_window_range 1.26097 2.5475
+3  Table 17 VHAR5 20 exploratory_outside_range_to_window_mean 1.14583 2.5475
+4  Table 17 VHAR5 20                    exploratory_no_filter 2.20889 2.5475
+5  Table 17 VHAR5 20                       endpoint_500_pairs 1.23416 2.5475
+21 Table 19 VHAR3 10        pipeline_filter_le0_to_window_min 0.33900 0.1487
+22 Table 19 VHAR3 10         exploratory_clip_to_window_range 0.07718 0.1487
+23 Table 19 VHAR3 10 exploratory_outside_range_to_window_mean 0.07266 0.1487
+24 Table 19 VHAR3 10                       endpoint_500_pairs 0.08605 0.1487
+31 Table 18 VHAR4 15        pipeline_filter_le0_to_window_min 0.13833 0.2896
+32 Table 18 VHAR4 15         exploratory_clip_to_window_range 0.10759 0.2896
+33 Table 18 VHAR4 15 exploratory_outside_range_to_window_mean 0.08624 0.2896
+34 Table 18 VHAR4 15                       endpoint_500_pairs 0.12867 0.2896
+41  Table 3 VHAR4 20        pipeline_filter_le0_to_window_min 1.69810 1.9388
+42  Table 3 VHAR4 20         exploratory_clip_to_window_range 1.68564 1.9388
+43  Table 3 VHAR4 20 exploratory_outside_range_to_window_mean 1.55907 1.9388
+44  Table 3 VHAR4 20                    exploratory_no_filter 1.92009 1.9388
+45  Table 3 VHAR4 20                       endpoint_500_pairs 1.68293 1.9388
+    rel_diff
+1  -0.496535
+2  -0.505017
+3  -0.550215
+4  -0.132918
+5  -0.515540
+21  1.279766
+22 -0.480945
+23 -0.511379
+24 -0.421344
+31 -0.522356
+32 -0.628488
+33 -0.702213
+34 -0.555701
+41 -0.124148
+42 -0.130576
+43 -0.195857
+44 -0.009652
+45 -0.131975

@@ -1,0 +1,19 @@
+"sample","table","panel","class","period","metric","model","h","calendar","variant","value","paper","rel_diff"
+"mag7","Table 17","vhar","vhar","full","MSFE","VHAR5",20,"common_obs","pipeline_filter_le0_to_window_min",1.28315809167194,2.5475,-0.496306931630248
+"mag7","Table 17","vhar","vhar","full","MSFE","VHAR5",20,"common_obs","exploratory_clip_to_window_range",1.26058248780072,2.5475,-0.505168797722976
+"mag7","Table 17","vhar","vhar","full","MSFE","VHAR5",20,"common_obs","exploratory_outside_range_to_window_mean",1.1485408633048,2.5475,-0.549149808320001
+"mag7","Table 17","vhar","vhar","full","MSFE","VHAR5",20,"common_obs","exploratory_no_filter",2.20879963793019,2.5475,-0.132954018476864
+"mag7","Table 17","vhar","vhar","full","MSFE","VHAR5",20,"common_obs","endpoint_500_pairs",1.234553046058,2.5475,-0.515386439231405
+"mag7","Table 19","vhar","vhar","full","QLIKE","VHAR3",10,"common_obs","pipeline_filter_le0_to_window_min",0.339832972622656,0.1487,1.28535960069036
+"mag7","Table 19","vhar","vhar","full","QLIKE","VHAR3",10,"common_obs","exploratory_clip_to_window_range",0.0775169905813443,0.1487,-0.478702148074349
+"mag7","Table 19","vhar","vhar","full","QLIKE","VHAR3",10,"common_obs","exploratory_outside_range_to_window_mean",0.0729830920687326,0.1487,-0.509192386894871
+"mag7","Table 19","vhar","vhar","full","QLIKE","VHAR3",10,"common_obs","endpoint_500_pairs",0.0862912035463309,0.1487,-0.419696008430861
+"dj30","Table 18","vhar","vhar","full","QLIKE","VHAR4",15,"common_obs","pipeline_filter_le0_to_window_min",0.146964771913321,0.2896,-0.492524958862843
+"dj30","Table 18","vhar","vhar","full","QLIKE","VHAR4",15,"common_obs","exploratory_clip_to_window_range",0.107587817337895,0.2896,-0.628495105877434
+"dj30","Table 18","vhar","vhar","full","QLIKE","VHAR4",15,"common_obs","exploratory_outside_range_to_window_mean",0.0866087505033859,0.2896,-0.70093663500212
+"dj30","Table 18","vhar","vhar","full","QLIKE","VHAR4",15,"common_obs","endpoint_500_pairs",0.129342519222516,0.2896,-0.553375278927775
+"dj30","Table 3","full","vhar","full","MSFE","VHAR4",20,"common_obs","pipeline_filter_le0_to_window_min",1.7015630268208,1.9388,-0.122362787899319
+"dj30","Table 3","full","vhar","full","MSFE","VHAR4",20,"common_obs","exploratory_clip_to_window_range",1.68985556678815,1.9388,-0.128401296271843
+"dj30","Table 3","full","vhar","full","MSFE","VHAR4",20,"common_obs","exploratory_outside_range_to_window_mean",1.56244646995883,1.9388,-0.194116737178238
+"dj30","Table 3","full","vhar","full","MSFE","VHAR4",20,"common_obs","exploratory_no_filter",1.92895187227516,1.9388,-0.00507949645390882
+"dj30","Table 3","full","vhar","full","MSFE","VHAR4",20,"common_obs","endpoint_500_pairs",1.6859603853695,1.9388,-0.13041036446797

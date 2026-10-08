@@ -1,2 +1,9 @@
 results/forecasts/*.rds
-logs/
+results/logs/code_b.log
+# from code-a
+data/raw/
+.Rhistory
+.RData
+.Rproj.user/
+.DS_Store
+results/smoke/

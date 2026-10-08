@@ -134,8 +134,11 @@ forecast_mfbm_window <- function(Y, horizons, delta) {
 # (no mfBm with these parameters exists) we shrink them by 5% steps until it is.
 # par$shrink says how many steps were needed (0 almost always)
 window_mfbm_params <- function(X, delta) {
-  X <- as.matrix(X)
-  est <- estimate_mfbm(X, delta)
+  admissible_window_params(estimate_mfbm(as.matrix(X), delta))
+}
+
+# clipping of H and shrinkage of rho, shared by both calendar conventions
+admissible_window_params <- function(est) {
   H <- pmin(pmax(est$H, 0.01), 0.99)
   sigma <- sqrt(est$sigma2)
   for (k in 0:100) {
@@ -146,6 +149,52 @@ window_mfbm_params <- function(X, delta) {
   }
   par$shrink <- k
   par
+}
+
+# --- trading-calendar version (review B1) -------------------------------------
+
+# the same forecast when the window is a block of consecutive trading days on
+# which some of the model's assets are not observed (NA).
+#   Y : window of log vol on the trading calendar, last row = origin (must be observed)
+# a day enters only if all assets of the model are observed on it. missing days
+# are neither filled in nor removed from the time axis:
+#   1. H, sigma, rho by the moment estimators on genuine 1- and 2-day increments
+#      (an increment that would span a missing day is left out)
+#   2. exact gaussian conditioning on the observed days at their true times
+#      (day - first observed day) * delta, target at (origin + h - first) * delta
+# without missing days this is forecast_mfbm_window() itself.
+forecast_mfbm_calendar <- function(Y, horizons, delta) {
+  Y <- as.matrix(Y)
+  if (!anyNA(Y)) return(forecast_mfbm_window(Y, horizons, delta))
+  obs <- which(stats::complete.cases(Y))
+  N <- nrow(Y)
+  if (!length(obs) || obs[length(obs)] != N) stop("the origin day must be observed for all assets")
+  par <- window_mfbm_params_calendar(Y, delta)
+  t0 <- obs[1]
+  fw <- mfbm_forecast_weights(par, (obs[-1] - t0) * delta, (N - t0 + horizons) * delta, target = 1)
+  Z <- sweep(Y[obs[-1], , drop = FALSE], 2, Y[t0, ])
+  log_mean <- Y[t0, 1] + drop(as.vector(t(Z)) %*% fw$W)
+  exp(log_mean + fw$msfe / 2)
+}
+
+# moment estimators (6), (7), (8a) on a trading-calendar window with missing days.
+# only increments between observed days 1 apart (1-day) and 2 apart (2-day) are
+# used, jointly for all columns. H is the ratio of mean squares times (m1 - 1) / m1,
+# which is exactly hurst_mm() when no day is missing.
+window_mfbm_params_calendar <- function(Y, delta) {
+  Y <- as.matrix(Y)
+  d1 <- diff(Y)
+  d2 <- diff(Y, lag = 2)
+  d1 <- d1[stats::complete.cases(d1), , drop = FALSE]
+  d2 <- d2[stats::complete.cases(d2), , drop = FALSE]
+  m1 <- nrow(d1)
+  m2 <- nrow(d2)
+  if (m1 < 10L || m2 < 10L) stop("too few observed increments in the window")
+  S1 <- colSums(d1^2)
+  H <- log((colSums(d2^2) / m2) / (S1 / m1) * (m1 - 1) / m1) / (2 * log(2))
+  rho <- crossprod(d1) / sqrt(outer(S1, S1))
+  diag(rho) <- 1
+  admissible_window_params(list(H = H, sigma2 = S1 / (m1 * delta^(2 * H)), rho = rho))
 }
 
 # a time-reversible mfBm exists iff the matrix

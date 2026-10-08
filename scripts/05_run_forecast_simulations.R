@@ -4,7 +4,7 @@
 #   tables 8-11 : monte carlo RMSFE of fBm / bfBm / mfBm3 / mfBm4 (appendix E.3)
 #
 # run from the project root:
-#   Rscript scripts/05_run_forecast_simulations.R smoke   (500 reps, results/smoke/)
+#   Rscript scripts/05_run_forecast_simulations.R smoke   (50 reps, results/smoke/)
 #   Rscript scripts/05_run_forecast_simulations.R full    (10000 reps as in the paper)
 
 source("R/code_b_config.R")
@@ -118,12 +118,14 @@ delta <- cfg$sim_delta
 # one experiment: simulate paths once, then evaluate every forecaster on them
 #   models: named list, each element = components the forecaster uses
 # every finished experiment is saved to <results>/simulations/checkpoints and a
-# rerun loads it (useful if the laptop sleeps or the run dies). delete the folder
-# after changing the code
+# rerun loads it only when settings, simulation count and model code agree.
 run_experiment <- function(table, setting, H, rho, models, targets, seed, estimate = FALSE) {
   dir.create(code_b_results("simulations", "checkpoints"), recursive = TRUE, showWarnings = FALSE)
+  identity <- code_b_fingerprint(list(table = table, setting = setting, H = H,
+    rho = rho, models = models, targets = targets, seed = seed, estimate = estimate,
+    n = n, horizons = hs, delta = delta, reps = cfg$sim_reps))
   file <- code_b_results("simulations", "checkpoints",
-                         paste0(gsub("[^A-Za-z0-9.]+", "_", paste(table, setting)), ".rds"))
+                         paste0(gsub("[^A-Za-z0-9.]+", "_", paste(table, setting)), "_", identity, ".rds"))
   if (file.exists(file)) {
     code_b_log("  ", table, " ", setting, " loaded from checkpoint")
     return(readRDS(file))

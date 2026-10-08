@@ -1,0 +1,69 @@
+[2026-10-08 16:24:37] 07 robustness, mode = full, cores = 11 
+[2026-10-08 16:24:37] calendar = trading (primary) 
+[2026-10-08 16:24:37]   trading calendar: 6 of 2198 origins skipped (asset_missing_at_origin = 6) 
+[2026-10-08 16:24:42]   fBm     2192 origins, 4.2 s 
+[2026-10-08 16:24:42]   HAR     2192 origins, 0.5 s 
+[2026-10-08 16:24:43]   LHAR    2192 origins, 0.5 s 
+[2026-10-08 16:24:57]   bfBm    2192 origins, 13.9 s 
+[2026-10-08 16:24:57]   VHAR2   2192 origins, 0.6 s 
+[2026-10-08 16:24:58]   VHARF2  2192 origins, 0.6 s 
+[2026-10-08 16:24:58]   VLHAR2  2192 origins, 0.7 s 
+[2026-10-08 16:25:34]   mfBm3   2192 origins, 35.3 s 
+[2026-10-08 16:25:34]   VHAR3   2192 origins, 0.6 s 
+[2026-10-08 16:25:35]   VHARF3  2192 origins, 0.6 s 
+[2026-10-08 16:25:36]   VLHAR3  2192 origins, 0.6 s 
+[2026-10-08 16:26:45]   mfBm4   2192 origins, 69.6 s 
+[2026-10-08 16:26:46]   VHAR4   2192 origins, 0.7 s 
+[2026-10-08 16:26:46]   VHARF4  2192 origins, 0.6 s 
+[2026-10-08 16:26:47]   VLHAR4  2192 origins, 0.7 s 
+[2026-10-08 16:29:05]   mfBm5   2192 origins, 137.9 s 
+[2026-10-08 16:29:06]   VHAR5   2192 origins, 0.7 s 
+[2026-10-08 16:29:07]   VHARF5  2192 origins, 0.6 s 
+[2026-10-08 16:29:07]   VLHAR5  2192 origins, 0.7 s 
+[2026-10-08 16:29:08] wrote results/tables/code_b_checks_mag7.csv 
+[2026-10-08 16:29:30] wrote results/tables/code_b_mag7_tables_vs_paper.csv 
+[2026-10-08 16:29:30] wrote results/tables/code_b_mag7_original_vs_ours.csv 
+[2026-10-08 16:29:30] [trading] mag7 same direction as the paper: 62 of 64 
+[2026-10-08 16:29:30] calendar = common_obs (sensitivity / replication mode) 
+[2026-10-08 16:29:34]   fBm     2188 origins, 4.0 s 
+[2026-10-08 16:29:34]   HAR     2188 origins, 0.6 s 
+[2026-10-08 16:29:35]   LHAR    2188 origins, 0.7 s 
+[2026-10-08 16:29:49]   bfBm    2188 origins, 13.8 s 
+[2026-10-08 16:29:49]   VHAR2   2188 origins, 0.6 s 
+[2026-10-08 16:29:50]   VHARF2  2188 origins, 0.6 s 
+[2026-10-08 16:29:51]   VLHAR2  2188 origins, 0.7 s 
+[2026-10-08 16:30:26]   mfBm3   2188 origins, 35.6 s 
+[2026-10-08 16:30:27]   VHAR3   2188 origins, 0.7 s 
+[2026-10-08 16:30:28]   VHARF3  2188 origins, 0.7 s 
+[2026-10-08 16:30:28]   VLHAR3  2188 origins, 0.8 s 
+[2026-10-08 16:31:55]   mfBm4   2188 origins, 86.6 s 
+[2026-10-08 16:31:56]   VHAR4   2188 origins, 0.9 s 
+[2026-10-08 16:31:57]   VHARF4  2188 origins, 0.8 s 
+[2026-10-08 16:31:58]   VLHAR4  2188 origins, 0.9 s 
+[2026-10-08 16:34:35]   mfBm5   2188 origins, 157.1 s 
+[2026-10-08 16:34:36]   VHAR5   2188 origins, 0.9 s 
+[2026-10-08 16:34:36]   VHARF5  2188 origins, 0.7 s 
+[2026-10-08 16:34:37]   VLHAR5  2188 origins, 0.9 s 
+[2026-10-08 16:34:38] wrote results/tables/code_b_checks_mag7_common_obs.csv 
+[2026-10-08 16:35:00] wrote results/tables/code_b_mag7_tables_vs_paper_common_obs.csv 
+[2026-10-08 16:35:00] wrote results/tables/code_b_mag7_original_vs_ours_common_obs.csv 
+[2026-10-08 16:35:00] [common_obs] mag7 same direction as the paper: 62 of 64 
+[2026-10-08 16:35:00] wrote results/tables/code_b_calendar_sensitivity_mag7.csv 
+[2026-10-08 16:35:00] wrote results/tables/code_b_calendar_keys_mag7.csv 
+[2026-10-08 16:35:00] wrote results/tables/code_b_provenance_07.csv 
+[2026-10-08 16:35:41] wrote results/tables/code_b_robust_dj30_subperiods.csv 
+[2026-10-08 16:35:44]   fBm     4509 origins, 3.2 s 
+[2026-10-08 16:35:52]   bfBm    4509 origins, 7.6 s 
+[2026-10-08 16:36:08]   mfBm3   4509 origins, 16.7 s 
+[2026-10-08 16:36:39]   mfBm4   4509 origins, 30.6 s 
+[2026-10-08 16:37:28]   mfBm5   4509 origins, 49.3 s 
+[2026-10-08 16:37:30]   HAR     4509 origins, 1.4 s 
+[2026-10-08 16:37:31]   VHAR2   4509 origins, 1.5 s 
+[2026-10-08 16:37:33]   VHAR3   4509 origins, 1.6 s 
+[2026-10-08 16:37:35]   VHAR4   4509 origins, 1.8 s 
+[2026-10-08 16:37:37]   VHAR5   4509 origins, 1.9 s 
+[2026-10-08 16:37:37] wrote results/tables/code_b_checks_dj30_window250.csv 
+[2026-10-08 16:37:51] wrote results/tables/code_b_robust_dj30_window250.csv 
+[2026-10-08 16:38:02] wrote results/tables/code_b_robust_dj30_window500_matched.csv 
+[2026-10-08 16:38:02] wrote results/tables/code_b_robust_window_comparison_matched.csv 
+[2026-10-08 16:38:02] 07 done 

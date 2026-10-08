@@ -1,2 +1,2 @@
-"n_models","n_rows","same_test_dates","no_lookahead","no_na_inf","positive_forecasts"
-10,380120,TRUE,TRUE,TRUE,TRUE
+"n_models","n_rows","same_test_dates","no_lookahead","no_na_inf","positive_forecasts","unique_keys","positive_actuals","same_actuals"
+10,360200,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE
