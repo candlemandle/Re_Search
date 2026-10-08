@@ -23,7 +23,7 @@ rolling_mean_observed <- function(v, k) {
   ok <- !is.na(v)
   cs <- cumsum(ifelse(ok, v, 0))
   cn <- cumsum(ok)
-  lag_k <- function(x) c(rep(0, k), x[seq_len(length(x) - k)])
+  lag_k <- function(x) c(rep(0, k), x)[seq_along(x)]
   n <- cn - lag_k(cn)
   out <- (cs - lag_k(cs)) / n
   out[seq_len(min(k - 1, length(v)))] <- NA

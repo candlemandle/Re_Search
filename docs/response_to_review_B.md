@@ -402,3 +402,118 @@ from `.Rlib`: 74 test blocks, 293 expectations, 0 failures.
 - The linear-HAR QLIKE levels and the long-horizon linear-VHAR MSFE levels are not robust
   replications. The period-2 gap is unresolved.
 - MCS is within-class. B = 5000 bootstrap p-values carry Monte Carlo noise of up to ±0.013.
+
+## Second review: empty evaluable targets
+
+**Verdict: `confirmed`, now fixed.** Reproduced on the reviewed commit `186efa0` before any change.
+The fix is local to how the forecast table is built. Retained forecasts are unchanged, and none of
+the scientific results or limitations above are affected.
+
+### Reproducer and behaviour before / after
+
+`docs/review_B/round2_empty_targets.R` drives the public entry point `run_all_models()`. Outcomes
+are written to `docs/review_B/round2_{before,after}.csv`.
+
+| case | reviewed `186efa0` | after the fix |
+|---|---|---|
+| 1. Synthetic panel, explicit origin t = 70, trading calendar, h = 1, 5, target missing at t+1 and t+5 | error: `arguments imply differing number of rows: 1, 0` | error of class `code_b_no_evaluable_forecasts`: `no evaluable forecasts: none of the 1 origins has an observed target within the panel for horizons 1, 5 (calendar = trading)` |
+| 1b. As case 1 with h = 1 only | same `data.frame()` error | same domain error |
+| 2. Actual DJ30 panel, full configuration, automatic origins, `horizons = c(15, 20)`, `model_names = "VHAR4"`, trading | `VHAR4: Error in data.frame(...): arguments imply differing number of rows: 1, 0` | runs: 8985 forecasts |
+| 2. As above, common_obs | same error | runs: 8983 forecasts |
+| Optional: `rolling_mean_observed(c(1, NA, 3), 5)` | error: `argument must be coercible to non-negative integer` | `NA NA NA` |
+
+**Valid-output invariance (case 2).** `docs/review_B/round2_invariance.R` compares the post-fix
+DJ30 VHAR4 output with the VHAR4 rows for h = 15, 20 of the saved full runs, which used all eight
+horizons:
+
+- **trading:** 8985 = 8985 rows. Keys, `forecast`, `actual`, `train_start` and `n_train_days` are
+  identical; max |forecast difference| = 0.
+- **common_obs:** 8983 = 8983 rows. Keys, `forecast` and `actual` are identical; max |difference|
+  = 0. The saved legacy common_obs table predates the training-metadata columns.
+
+### Change and policy
+
+All changes are in `R/rolling_window.R`:
+
+- **Skipping origins.** In `rolling_forecasts()`, the evaluable horizons of an origin are now
+  determined first: target inside the panel and observed. An origin with none is skipped *before*
+  the model is fitted. The test depends only on the target column at t + h, so the same origins
+  are omitted for every model, and no future value enters fitting or prediction. Targets are still
+  never moved.
+- **Empty model result.** If no origin of a model has an evaluable horizon, the function returns
+  `empty_forecast_table(dates)`. This is a zero-row table with exactly the columns and types of the
+  normal output, with `origin_date`, `target_date` and `train_start` kept as Date. It passes
+  through `rbind` and through the checkpoint save/load path.
+- **Empty run.** If the stacked result of `run_all_models()` has zero rows, the function raises a
+  classed error `code_b_no_evaluable_forecasts`. The message names the number of origins, the
+  horizons and the calendar.
+
+**Why an error rather than an empty table.** Every downstream caller needs forecasts:
+`check_forecasts()`, `paper_tables()` and the window-250 matching. Returning an empty table would
+only move the failure to an unrelated place, so a clear domain error at the public entry point was
+chosen.
+
+**What stays the same.** There is no `tryCatch()` around model code. A numerical or model error at
+an evaluable origin is still re-raised with the model name, as before.
+
+`R/forecast_har.R`: `rolling_mean_observed()` now lags with `c(rep(0, k), x)[seq_along(x)]`, so a
+series shorter than k returns NA, as documented. Results for series of length ≥ k are unchanged.
+
+`scripts/run_tests.R` is added to this branch, copied unchanged from the integrated root. It is the
+entry point named in the instructions.
+
+### Regression tests (`tests/testthat/test-calendar.R`, 6 new blocks)
+
+1. **One origin, h = 1, 5, both targets missing.** `rolling_forecasts()` returns a zero-row table
+   with the same column classes as a non-empty one. `run_all_models()` raises
+   `code_b_no_evaluable_forecasts`.
+2. **One origin, single horizon, its target missing.** Raises the domain error. With h = 1, 5
+   configured, the same origin keeps only h = 5 at t + 5, not moved.
+3. **Automatic origins with h = 15, 20, both calendars.** Trailing origins are skipped. The result
+   equals a run on exactly the origins that have an evaluable horizon. Targets are origin + h rows.
+   The checkpoint store and reload gives the same table.
+4. **Mixture of a valid origin and an empty one** (missing targets). The output equals the baseline
+   run of the valid origin on the unmodified panel, for all 19 models with equal key counts.
+5. **Whole run with no evaluable rows, both calendars.** The domain error is raised through
+   `run_all_models()`, and the message is checked.
+6. **`rolling_mean_observed()`** for n < k, n = 0 and n ≥ k.
+
+Against the reviewed code, all six new blocks fail (blocks 10–15: 4 with errors, 2 with failed
+expectations; checked on an archive of `186efa0` with the new test file). After the fix they pass. The existing
+future-value and future-missingness invariance tests are kept and pass.
+
+### Commands and results (2026-10-08)
+
+The environment is R 4.6.1 (Homebrew, macOS, aarch64) with system testthat 3.3.2. This branch has
+no project `.Rlib`; `scripts/run_tests.R` uses one only if present. Every command ran in a separate
+clean session.
+
+```sh
+Rscript --vanilla docs/review_B/round2_empty_targets.R before      # on 186efa0: all 5 cases fail
+Rscript --vanilla docs/review_B/round2_empty_targets.R after       # after the fix: see table above
+Rscript --vanilla docs/review_B/round2_invariance.R docs/review_B/round2_after_dj30_vhar4.rds \
+  <saved full trading forecasts> results/forecasts/code_b_forecasts_dj30.rds
+Rscript --vanilla scripts/run_tests.R smoke                         # 66 blocks, 275 expectations, 0 failures
+Rscript --vanilla scripts/05_run_forecast_simulations.R smoke       # exit 0
+Rscript --vanilla scripts/06_run_empirical_forecasts.R smoke        # exit 0, both calendars
+Rscript --vanilla scripts/07_run_robustness.R smoke                 # exit 0, both calendars
+```
+
+- **Fresh computation.** The smoke runs recomputed every model: 0 models loaded from checkpoints,
+  because the checkpoint fingerprint includes the changed functions. Logs are in
+  `docs/review_B/round2_logs/`, and smoke tables are in `results/smoke/tables/` (not tracked).
+- **Integration with Code C.** The same two R files and test file applied in the integrated A/B/C
+  root give `Rscript --vanilla scripts/run_tests.R smoke`: 80 blocks, 323 expectations, 0 failures.
+- **Full run.** No fresh full multivariate run was made. The retained-output comparison above shows
+  that the fix does not change existing forecasts.
+
+### Remaining limitations
+
+- This is an implementation fix for runs in which some or all origins have no evaluable target.
+- It does not change, and does not resolve, the scientific discrepancies documented above:
+  Table 2 period 2, the long-horizon linear-VHAR levels, and the sensitivity of linear-HAR QLIKE
+  (including Mag7 VHAR3 h = 10). The latter is shown to be dominated by one forecast, which does not
+  explain why the article reports a different number.
+- The labelled `common_obs` mode, the primary positivity rule and the validated MCS algorithm are
+  unchanged.
+- Acceptance of this correction is requested from the independent reviewer; it is not self-assigned.

@@ -1,0 +1,68 @@
+[2026-10-08 18:53:52] 07 robustness, mode = smoke, cores = 11 
+[2026-10-08 18:53:52] calendar = trading (primary) 
+[2026-10-08 18:53:52]   fBm     5 origins, 0.0 s 
+[2026-10-08 18:53:52]   HAR     5 origins, 0.0 s 
+[2026-10-08 18:53:52]   LHAR    5 origins, 0.0 s 
+[2026-10-08 18:53:52]   bfBm    5 origins, 0.1 s 
+[2026-10-08 18:53:52]   VHAR2   5 origins, 0.0 s 
+[2026-10-08 18:53:53]   VHARF2  5 origins, 0.0 s 
+[2026-10-08 18:53:53]   VLHAR2  5 origins, 0.0 s 
+[2026-10-08 18:53:53]   mfBm3   5 origins, 0.2 s 
+[2026-10-08 18:53:53]   VHAR3   5 origins, 0.0 s 
+[2026-10-08 18:53:53]   VHARF3  5 origins, 0.0 s 
+[2026-10-08 18:53:53]   VLHAR3  5 origins, 0.0 s 
+[2026-10-08 18:53:53]   mfBm4   5 origins, 0.3 s 
+[2026-10-08 18:53:53]   VHAR4   5 origins, 0.0 s 
+[2026-10-08 18:53:53]   VHARF4  5 origins, 0.0 s 
+[2026-10-08 18:53:53]   VLHAR4  5 origins, 0.0 s 
+[2026-10-08 18:53:54]   mfBm5   5 origins, 0.5 s 
+[2026-10-08 18:53:54]   VHAR5   5 origins, 0.0 s 
+[2026-10-08 18:53:54]   VHARF5  5 origins, 0.0 s 
+[2026-10-08 18:53:54]   VLHAR5  5 origins, 0.0 s 
+[2026-10-08 18:53:54] wrote results/smoke/tables/code_b_checks_mag7.csv 
+[2026-10-08 18:53:54] wrote results/smoke/tables/code_b_mag7_tables_vs_paper.csv 
+[2026-10-08 18:53:54] wrote results/smoke/tables/code_b_mag7_original_vs_ours.csv 
+[2026-10-08 18:53:54] [trading] mag7 same direction as the paper: 32 of 64 
+[2026-10-08 18:53:54] calendar = common_obs (sensitivity / replication mode) 
+[2026-10-08 18:53:54]   fBm     5 origins, 0.0 s 
+[2026-10-08 18:53:54]   HAR     5 origins, 0.0 s 
+[2026-10-08 18:53:54]   LHAR    5 origins, 0.0 s 
+[2026-10-08 18:53:54]   bfBm    5 origins, 0.1 s 
+[2026-10-08 18:53:54]   VHAR2   5 origins, 0.0 s 
+[2026-10-08 18:53:54]   VHARF2  5 origins, 0.0 s 
+[2026-10-08 18:53:54]   VLHAR2  5 origins, 0.0 s 
+[2026-10-08 18:53:54]   mfBm3   5 origins, 0.2 s 
+[2026-10-08 18:53:54]   VHAR3   5 origins, 0.0 s 
+[2026-10-08 18:53:54]   VHARF3  5 origins, 0.0 s 
+[2026-10-08 18:53:54]   VLHAR3  5 origins, 0.0 s 
+[2026-10-08 18:53:54]   mfBm4   5 origins, 0.3 s 
+[2026-10-08 18:53:55]   VHAR4   5 origins, 0.0 s 
+[2026-10-08 18:53:55]   VHARF4  5 origins, 0.0 s 
+[2026-10-08 18:53:55]   VLHAR4  5 origins, 0.0 s 
+[2026-10-08 18:53:55]   mfBm5   5 origins, 0.5 s 
+[2026-10-08 18:53:55]   VHAR5   5 origins, 0.0 s 
+[2026-10-08 18:53:55]   VHARF5  5 origins, 0.0 s 
+[2026-10-08 18:53:55]   VLHAR5  5 origins, 0.0 s 
+[2026-10-08 18:53:55] wrote results/smoke/tables/code_b_checks_mag7_common_obs.csv 
+[2026-10-08 18:53:55] wrote results/smoke/tables/code_b_mag7_tables_vs_paper_common_obs.csv 
+[2026-10-08 18:53:55] wrote results/smoke/tables/code_b_mag7_original_vs_ours_common_obs.csv 
+[2026-10-08 18:53:55] [common_obs] mag7 same direction as the paper: 50 of 64 
+[2026-10-08 18:53:55] wrote results/smoke/tables/code_b_calendar_sensitivity_mag7.csv 
+[2026-10-08 18:53:55] wrote results/smoke/tables/code_b_calendar_keys_mag7.csv 
+[2026-10-08 18:53:55] wrote results/smoke/tables/code_b_provenance_07.csv 
+[2026-10-08 18:53:55] wrote results/smoke/tables/code_b_robust_dj30_subperiods.csv 
+[2026-10-08 18:53:55]   fBm     10 origins, 0.0 s 
+[2026-10-08 18:53:55]   bfBm    10 origins, 0.1 s 
+[2026-10-08 18:53:56]   mfBm3   10 origins, 0.1 s 
+[2026-10-08 18:53:56]   mfBm4   10 origins, 0.1 s 
+[2026-10-08 18:53:56]   mfBm5   10 origins, 0.1 s 
+[2026-10-08 18:53:56]   HAR     10 origins, 0.0 s 
+[2026-10-08 18:53:56]   VHAR2   10 origins, 0.0 s 
+[2026-10-08 18:53:56]   VHAR3   10 origins, 0.0 s 
+[2026-10-08 18:53:56]   VHAR4   10 origins, 0.0 s 
+[2026-10-08 18:53:56]   VHAR5   10 origins, 0.0 s 
+[2026-10-08 18:53:56] wrote results/smoke/tables/code_b_checks_dj30_window250.csv 
+[2026-10-08 18:53:56] wrote results/smoke/tables/code_b_robust_dj30_window250.csv 
+[2026-10-08 18:53:56] wrote results/smoke/tables/code_b_robust_dj30_window500_matched.csv 
+[2026-10-08 18:53:56] wrote results/smoke/tables/code_b_robust_window_comparison_matched.csv 
+[2026-10-08 18:53:56] 07 done 

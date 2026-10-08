@@ -1,0 +1,10 @@
+"case","status","rows","message"
+"1 synthetic trading: one origin, h = 1,5, both targets NA","error",NA,"arguments imply differing number of rows: 1, 0"
+"1b synthetic trading: one origin, h = 1, target NA","error",NA,"arguments imply differing number of rows: 1, 0"
+"2 DJ30 trading: automatic origins, h = 15,20, VHAR4","error",NA,"VHAR4: Error in data.frame(model = model$name, class = model$class, h = horizons[ok],  : 
+  arguments imply differing number of rows: 1, 0
+"
+"2 DJ30 common_obs: automatic origins, h = 15,20, VHAR4","error",NA,"VHAR4: Error in data.frame(model = model$name, class = model$class, h = horizons[ok],  : 
+  arguments imply differing number of rows: 1, 0
+"
+"optional: rolling_mean_observed(c(1, NA, 3), 5)","error",NA,"argument must be coercible to non-negative integer"

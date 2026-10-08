@@ -1,0 +1,6 @@
+"case","status","rows","message"
+"1 synthetic trading: one origin, h = 1,5, both targets NA","error",NA,"no evaluable forecasts: none of the 1 origins has an observed target within the panel for horizons 1, 5 (calendar = trading)"
+"1b synthetic trading: one origin, h = 1, target NA","error",NA,"no evaluable forecasts: none of the 1 origins has an observed target within the panel for horizons 1 (calendar = trading)"
+"2 DJ30 trading: automatic origins, h = 15,20, VHAR4","ok",8985,""
+"2 DJ30 common_obs: automatic origins, h = 15,20, VHAR4","ok",8983,""
+"optional: rolling_mean_observed(c(1, NA, 3), 5)","ok",3,""

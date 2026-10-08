@@ -157,3 +157,85 @@ test_that("checkpoint fingerprints distinguish the calendar and the coverage rul
   expect_false(identical(k0, k2))
   expect_error(code_b_calendar(list(calendar = "weekly")))
 })
+
+# --- second review: origins without an evaluable horizon ---------------------------
+
+no_eval <- "code_b_no_evaluable_forecasts"
+
+test_that("one origin whose targets are all missing gives a typed empty table and a clear error", {
+  p <- cal_panel(); t <- 70L
+  q <- p; q$A[c(t + 1L, t + 5L)] <- NA
+  L <- as.matrix(q[, LETTERS[1:5]])
+  m <- code_b_models(LETTERS[1:5], 60L, 1 / 252, "trading")
+  e <- rolling_forecasts(L, q$date, m$mfBm5, t, c(1L, 5L))
+  ok <- rolling_forecasts(as.matrix(p[, LETTERS[1:5]]), p$date, m$mfBm5, t, c(1L, 5L))
+  expect_equal(nrow(e), 0L)
+  expect_identical(lapply(e, class), lapply(ok, class)) # same schema, Date columns kept
+  expect_s3_class(e$target_date, "Date")
+  expect_error(run_quiet(q, LETTERS[1:5], cal_cfg("trading", t, q)), class = no_eval)
+  expect_error(run_quiet(q, LETTERS[1:5], cal_cfg("trading", t, q)), "no evaluable forecasts")
+})
+
+test_that("one origin with a single horizon whose target is missing", {
+  p <- cal_panel(); t <- 70L
+  q <- p; q$A[t + 1L] <- NA
+  cfg <- modifyList(cal_cfg("trading", t, q), list(horizons = 1L))
+  expect_error(run_quiet(q, LETTERS[1:5], cfg), class = no_eval)
+  # the same origin still forecasts h = 5 when it is configured; the missing h = 1 is not moved
+  fc <- run_quiet(q, LETTERS[1:5], modifyList(cfg, list(horizons = c(1L, 5L))), model_names = c("fBm", "VHAR5"))
+  expect_equal(unique(fc$h), 5L)
+  expect_true(all(fc$target_date == q$date[t + 5L]))
+})
+
+test_that("automatic origins with only long horizons skip trailing origins in both calendars", {
+  p <- cal_panel()
+  for (cal in code_b_calendars()) {
+    cfg <- list(window = 60L, delta = 1 / 252, horizons = c(15L, 20L), origin_step = 1L, calendar = cal)
+    fc <- run_quiet(p, LETTERS[1:5], cfg, model_names = c("fBm", "bfBm", "HAR", "VHAR3"))
+    expect_true(check_forecasts(fc)$same_test_dates)
+    expect_equal(max(fc$origin_date), p$date[nrow(p) - 15L]) # later origins have no target in the panel
+    expect_true(all(match(fc$target_date, p$date) - match(fc$origin_date, p$date) == fc$h))
+    # identical to running only the origins that have an evaluable horizon
+    valid <- p$date[60:(nrow(p) - 15L)]
+    ref <- run_quiet(p, LETTERS[1:5], modifyList(cfg, list(origin_dates = valid)),
+                     model_names = c("fBm", "bfBm", "HAR", "VHAR3"))
+    expect_equal(fc, ref)
+    # the checkpoint path stores and reloads the same table
+    old <- setwd(tempdir()); on.exit(setwd(old), add = TRUE)
+    unlink(code_b_results("forecasts", "checkpoints"), recursive = TRUE)
+    a <- run_all_models(p, LETTERS[1:5], cfg, model_names = c("fBm", "VHAR3"), checkpoint = "rt")
+    b <- run_all_models(p, LETTERS[1:5], cfg, model_names = c("fBm", "VHAR3"), checkpoint = "rt")
+    setwd(old)
+    expect_equal(a, b)
+    sub <- fc[fc$model %in% c("fBm", "VHAR3"), ]; rownames(sub) <- NULL
+    expect_equal(a, sub)
+  }
+})
+
+test_that("valid origins are unchanged and empty origins are omitted for every model", {
+  p <- cal_panel(); t <- 70L; o1 <- t - 10L
+  q <- p; q$A[c(t + 1L, t + 5L)] <- NA # targets of origin t only; origin o1 trains on rows <= o1
+  cfg <- modifyList(cal_cfg("trading", t, q), list(origin_dates = q$date[c(o1, t)]))
+  fc <- run_quiet(q, LETTERS[1:5], cfg)
+  base <- run_quiet(p, LETTERS[1:5], modifyList(cfg, list(origin_dates = p$date[o1])))
+  expect_equal(unique(fc$origin_date), p$date[o1])
+  expect_equal(fc, base)
+  expect_true(all(table(fc$model) == 2L)) # h = 1 and 5 for each of the 19 models
+})
+
+test_that("a run with no evaluable rows raises the domain error in both calendars", {
+  p <- cal_panel(); n <- nrow(p)
+  for (cal in code_b_calendars()) {
+    cfg <- list(window = 60L, delta = 1 / 252, horizons = c(5L, 10L), origin_step = 1L,
+                origin_dates = p$date[c(n - 4L, n - 1L)], calendar = cal)
+    expect_error(run_quiet(p, LETTERS[1:5], cfg), class = no_eval)
+    err <- tryCatch(run_quiet(p, LETTERS[1:5], cfg), error = identity)
+    expect_match(conditionMessage(err), paste0("none of the 2 origins.*horizons 5, 10 .*calendar = ", cal))
+  }
+})
+
+test_that("rolling_mean_observed returns NA when the series is shorter than k", {
+  expect_equal(rolling_mean_observed(c(1, NA, 3), 5), rep(NA_real_, 3))
+  expect_equal(rolling_mean_observed(numeric(), 5), numeric())
+  expect_equal(rolling_mean_observed(c(1, NA, 3, 5, 7, 9), 5), c(NA, NA, NA, NA, 4, 6))
+})

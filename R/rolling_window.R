@@ -90,14 +90,18 @@ forecast_origins <- function(n_rows, window, step = 1L) {
 #   dates : dates of the rows of L
 # the model only ever sees L[1:t, ] so it can not use the future.
 # the target of origin t and horizon h is row t + h; it is dropped (for every model,
-# because the actual is shared) when the target is not observed, never moved
+# because the actual is shared) when it is outside the panel or not observed, never
+# moved. an origin without any evaluable horizon is skipped before the model is
+# fitted, so it is omitted for every model alike. returns a typed zero-row table
+# (empty_forecast_table()) when no origin has an evaluable horizon
 rolling_forecasts <- function(L, dates, model, origins, horizons, cores = 1L) {
   window <- if (is.null(model$window)) NA_integer_ else model$window
   one_origin <- function(t) {
-    past <- L[1:t, model$assets, drop = FALSE]
-    fc <- model$fun(past, horizons)
     ok <- t + horizons <= nrow(L)
     ok[ok] <- is.finite(L[t + horizons[ok], 1])
+    if (!any(ok)) return(NULL) # nothing to evaluate at this origin
+    past <- L[1:t, model$assets, drop = FALSE]
+    fc <- model$fun(past, horizons)
     data.frame(
       model = model$name,
       class = model$class,
@@ -114,7 +118,16 @@ rolling_forecasts <- function(L, dates, model, origins, horizons, cores = 1L) {
   res <- parallel::mclapply(origins, one_origin, mc.cores = cores)
   failed <- vapply(res, inherits, TRUE, "try-error")
   if (any(failed)) stop(model$name, ": ", res[[which(failed)[1]]])
+  res <- res[!vapply(res, is.null, TRUE)]
+  if (!length(res)) return(empty_forecast_table(dates))
   do.call(rbind, res)
+}
+
+# zero-row forecast table with the same columns and types as rolling_forecasts()
+empty_forecast_table <- function(dates) {
+  data.frame(model = character(), class = character(), h = integer(),
+             origin_date = dates[0], target_date = dates[0], forecast = numeric(),
+             actual = numeric(), train_start = dates[0], n_train_days = integer())
 }
 
 # run every model on the same origins and stack the results.
@@ -178,6 +191,13 @@ run_all_models <- function(panel, assets, cfg, cores = 1L, model_names = NULL,
   }
   fc <- do.call(rbind, out)
   rownames(fc) <- NULL
+  if (!nrow(fc)) {
+    # a run in which no origin has an observed target inside the panel for any h
+    stop(structure(class = c("code_b_no_evaluable_forecasts", "error", "condition"), list(
+      message = paste0("no evaluable forecasts: none of the ", length(origins), " origins has an observed ",
+                       "target within the panel for horizons ", paste(cfg$horizons, collapse = ", "),
+                       " (calendar = ", calendar, ")"), call = NULL)))
+  }
   fc$calendar <- calendar
   fc
 }

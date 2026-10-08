@@ -1,0 +1,73 @@
+[2026-10-08 18:53:48] 06 empirical forecasts DJ30, mode = smoke, cores = 11 
+[2026-10-08 18:53:48] calendar = trading (primary) 
+[2026-10-08 18:53:48]   fBm     10 origins, 0.1 s 
+[2026-10-08 18:53:48]   HAR     10 origins, 0.0 s 
+[2026-10-08 18:53:48]   LHAR    10 origins, 0.0 s 
+[2026-10-08 18:53:48]   bfBm    10 origins, 0.1 s 
+[2026-10-08 18:53:48]   VHAR2   10 origins, 0.0 s 
+[2026-10-08 18:53:48]   VHARF2  10 origins, 0.0 s 
+[2026-10-08 18:53:48]   VLHAR2  10 origins, 0.0 s 
+[2026-10-08 18:53:48]   mfBm3   10 origins, 0.2 s 
+[2026-10-08 18:53:48]   VHAR3   10 origins, 0.0 s 
+[2026-10-08 18:53:48]   VHARF3  10 origins, 0.0 s 
+[2026-10-08 18:53:48]   VLHAR3  10 origins, 0.0 s 
+[2026-10-08 18:53:49]   mfBm4   10 origins, 0.4 s 
+[2026-10-08 18:53:49]   VHAR4   10 origins, 0.0 s 
+[2026-10-08 18:53:49]   VHARF4  10 origins, 0.0 s 
+[2026-10-08 18:53:49]   VLHAR4  10 origins, 0.0 s 
+[2026-10-08 18:53:50]   mfBm5   10 origins, 0.7 s 
+[2026-10-08 18:53:50]   VHAR5   10 origins, 0.0 s 
+[2026-10-08 18:53:50]   VHARF5  10 origins, 0.0 s 
+[2026-10-08 18:53:50]   VLHAR5  10 origins, 0.0 s 
+[2026-10-08 18:53:50] all models: 0.0 min 
+[2026-10-08 18:53:50] wrote results/smoke/tables/code_b_checks_dj30.csv 
+[2026-10-08 18:53:50] wrote results/smoke/tables/code_b_dj30_tables_vs_paper.csv 
+[2026-10-08 18:53:50] wrote results/smoke/tables/code_b_dj30_original_vs_ours.csv 
+[2026-10-08 18:53:50] wrote results/smoke/tables/code_b_table02_dj30.csv 
+[2026-10-08 18:53:50] wrote results/smoke/tables/code_b_table03_dj30.csv 
+[2026-10-08 18:53:50] wrote results/smoke/tables/code_b_table15_dj30.csv 
+[2026-10-08 18:53:50] wrote results/smoke/tables/code_b_table16_dj30.csv 
+[2026-10-08 18:53:50] wrote results/smoke/tables/code_b_table18_dj30.csv 
+[2026-10-08 18:53:50] [trading] mfBm5 better than fBm (MSFE, full period): 2 of 8 horizons 
+[2026-10-08 18:53:50] [trading] same direction as the paper: 40 of 80 
+[2026-10-08 18:53:50] calendar = common_obs (sensitivity / replication mode) 
+[2026-10-08 18:53:50]   fBm     10 origins, 0.0 s 
+[2026-10-08 18:53:50]   HAR     10 origins, 0.0 s 
+[2026-10-08 18:53:50]   LHAR    10 origins, 0.0 s 
+[2026-10-08 18:53:50]   bfBm    10 origins, 0.1 s 
+[2026-10-08 18:53:50]   VHAR2   10 origins, 0.0 s 
+[2026-10-08 18:53:50]   VHARF2  10 origins, 0.0 s 
+[2026-10-08 18:53:50]   VLHAR2  10 origins, 0.0 s 
+[2026-10-08 18:53:50]   mfBm3   10 origins, 0.2 s 
+[2026-10-08 18:53:51]   VHAR3   10 origins, 0.0 s 
+[2026-10-08 18:53:51]   VHARF3  10 origins, 0.0 s 
+[2026-10-08 18:53:51]   VLHAR3  10 origins, 0.0 s 
+[2026-10-08 18:53:51]   mfBm4   10 origins, 0.4 s 
+[2026-10-08 18:53:51]   VHAR4   10 origins, 0.0 s 
+[2026-10-08 18:53:51]   VHARF4  10 origins, 0.0 s 
+[2026-10-08 18:53:51]   VLHAR4  10 origins, 0.0 s 
+[2026-10-08 18:53:52]   mfBm5   10 origins, 0.6 s 
+[2026-10-08 18:53:52]   VHAR5   10 origins, 0.0 s 
+[2026-10-08 18:53:52]   VHARF5  10 origins, 0.0 s 
+[2026-10-08 18:53:52]   VLHAR5  10 origins, 0.0 s 
+[2026-10-08 18:53:52] all models: 0.0 min 
+[2026-10-08 18:53:52] wrote results/smoke/tables/code_b_checks_dj30_common_obs.csv 
+[2026-10-08 18:53:52] wrote results/smoke/tables/code_b_dj30_tables_vs_paper_common_obs.csv 
+[2026-10-08 18:53:52] wrote results/smoke/tables/code_b_dj30_original_vs_ours_common_obs.csv 
+[2026-10-08 18:53:52] wrote results/smoke/tables/code_b_table02_dj30_common_obs.csv 
+[2026-10-08 18:53:52] wrote results/smoke/tables/code_b_table03_dj30_common_obs.csv 
+[2026-10-08 18:53:52] wrote results/smoke/tables/code_b_table15_dj30_common_obs.csv 
+[2026-10-08 18:53:52] wrote results/smoke/tables/code_b_table16_dj30_common_obs.csv 
+[2026-10-08 18:53:52] wrote results/smoke/tables/code_b_table18_dj30_common_obs.csv 
+[2026-10-08 18:53:52] [common_obs] mfBm5 better than fBm (MSFE, full period): 0 of 8 horizons 
+[2026-10-08 18:53:52] [common_obs] same direction as the paper: 33 of 80 
+[2026-10-08 18:53:52] wrote results/smoke/tables/code_b_calendar_sensitivity_dj30.csv 
+[2026-10-08 18:53:52] wrote results/smoke/tables/code_b_calendar_keys_dj30.csv 
+[2026-10-08 18:53:52] wrote results/smoke/tables/code_b_provenance_06.csv 
+null device 
+          1 
+null device 
+          1 
+null device 
+          1 
+[2026-10-08 18:53:52] 06 done 
