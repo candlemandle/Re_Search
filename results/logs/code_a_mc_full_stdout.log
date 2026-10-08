@@ -1,0 +1,21 @@
+[2026-10-04 20:44:42] 04_run_monte_carlo: mode = full, experiments = e1,t6,t7,t12,g, cores = 7 
+[2026-10-04 20:44:44]   Tables 4-5 finished in 1.6 s 
+[2026-10-04 20:44:44] wrote results/tables/code_a_mc_table04_05_estimators.csv 
+[2026-10-04 20:44:44] wrote results/tables/code_a_mc_table04_05_vs_paper.csv 
+[2026-10-04 20:44:48]   Table 6 finished in 4.5 s 
+[2026-10-04 20:44:48] wrote results/tables/code_a_mc_table06_byz_vs_ac.csv 
+[2026-10-04 20:44:48] wrote results/tables/code_a_mc_table06_vs_paper.csv 
+[2026-10-04 20:46:01]   Table 7 finished in 72.5 s 
+[2026-10-04 20:46:01] wrote results/tables/code_a_mc_table07_test_size_power.csv 
+[2026-10-04 20:46:01] wrote results/tables/code_a_mc_table07_vs_paper.csv 
+[2026-10-04 20:46:01] wrote results/figures/code_a_mc_power_curve.pdf 
+[2026-10-04 20:46:03]   Table 12 finished in 1.9 s 
+[2026-10-04 20:46:03] wrote results/tables/code_a_mc_table12_measurement_error.csv 
+[2026-10-04 20:46:03] wrote results/tables/code_a_mc_table12_vs_paper.csv 
+[2026-10-04 20:57:53]   Table 20 / Figures 9-10 finished in 709.9 s 
+[2026-10-04 20:57:53] wrote results/tables/code_a_mc_table20_gmm.csv 
+[2026-10-04 20:57:53] wrote results/tables/code_a_mc_gmm_optimal_weights_true.csv 
+[2026-10-04 20:57:53] wrote results/tables/code_a_mc_table20_vs_paper.csv 
+[2026-10-04 20:57:53] wrote results/figures/code_a_fig09_gmm_estimates.pdf, results/figures/code_a_fig10_gmm_variances.pdf 
+[2026-10-04 20:57:53] 04_run_monte_carlo: done 
+Rscript scripts/04_run_monte_carlo.R full  4091.97s user 193.30s system 541% cpu 13:10.90 total

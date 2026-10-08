@@ -1,0 +1,195 @@
+[2026-10-04 20:42:35] 00_check_author_code: start 
+[2026-10-04 20:42:35]   author files ran: BYZestimator.R (H1hat = 0.1199), BYZinference.R (seeta = 0.0733) 
+[2026-10-04 20:43:00] wrote results/tables/code_a_author_code_comparison.csv 
+[2026-10-04 20:43:00] 00_check_author_code: done 
+[2026-10-04 20:43:00] 02_prepare_data: measure = qmle_trade 
+[2026-10-04 20:43:02] DJ30 panel: 5019 dates, 2005-01-05 to 2025-01-14 
+[2026-10-04 20:43:02] Mag7 panel: 2698 dates, 2014-03-27 to 2025-01-14 
+[2026-10-04 20:43:02] wrote results/tables/code_a_data_summary.csv 
+[2026-10-04 20:43:02] 02_prepare_data: done 
+[2026-10-04 20:43:02] 03_estimate_parameters: mode = full 
+[2026-10-04 20:43:03] Table 1: n = 5007 increments, 2005-01-06 to 2025-01-14 
+[2026-10-04 20:43:10] wrote results/tables/code_a_table01_estimates.csv 
+[2026-10-04 20:43:10] wrote results/tables/code_a_table13_14_dj30.csv 
+[2026-10-04 20:43:15] wrote results/tables/code_a_time_reversibility_dj30.csv 
+[2026-10-04 20:43:15] wrote results/tables/code_a_time_reversibility_mag7.csv 
+[2026-10-04 20:43:15] wrote results/tables/code_a_time_reversibility_summary.csv 
+[2026-10-04 20:43:15] Reversibility: DJ30 rejected at 1%: 27 / 435 
+[2026-10-04 20:43:15] wrote results/tables/code_a_mag7_estimates.csv 
+[2026-10-04 20:43:15] wrote results/tables/code_a_original_vs_ours_empirical.csv 
+[2026-10-04 20:43:15] wrote results/tables/code_a_fig07_rolling_H_dj30.csv 
+[2026-10-04 20:43:15] wrote results/tables/code_a_fig08_rolling_H_mag7.csv 
+[2026-10-04 20:43:15] wrote results/figures/code_a_fig07_rolling_H_dj30.pdf 
+[2026-10-04 20:43:15] wrote results/figures/code_a_fig08_rolling_H_mag7.pdf 
+[2026-10-04 20:43:15] wrote results/figures/code_a_fig01_sample_paths.pdf 
+[2026-10-04 20:43:15] wrote results/figures/code_a_fig02_rho_max.pdf 
+[2026-10-04 20:43:15] wrote results/figures/code_a_fig03_admissible.pdf 
+[2026-10-04 20:43:15] 03_estimate_parameters: done 
+[2026-10-04 20:43:16] 04_run_monte_carlo: mode = smoke, experiments = e1,t6,t7,t12,g, cores = 7 
+[2026-10-04 20:43:16]   Tables 4-5 finished in 0.5 s 
+[2026-10-04 20:43:16] wrote results/smoke/tables/code_a_mc_table04_05_estimators.csv 
+[2026-10-04 20:43:16] wrote results/smoke/tables/code_a_mc_table04_05_vs_paper.csv 
+[2026-10-04 20:43:17]   Table 6 finished in 0.6 s 
+[2026-10-04 20:43:17] wrote results/smoke/tables/code_a_mc_table06_byz_vs_ac.csv 
+[2026-10-04 20:43:17] wrote results/smoke/tables/code_a_mc_table06_vs_paper.csv 
+[2026-10-04 20:43:20]   Table 7 finished in 3.3 s 
+[2026-10-04 20:43:20] wrote results/smoke/tables/code_a_mc_table07_test_size_power.csv 
+[2026-10-04 20:43:20] wrote results/smoke/tables/code_a_mc_table07_vs_paper.csv 
+[2026-10-04 20:43:20] wrote results/smoke/figures/code_a_mc_power_curve.pdf 
+[2026-10-04 20:43:21]   Table 12 finished in 0.3 s 
+[2026-10-04 20:43:21] wrote results/smoke/tables/code_a_mc_table12_measurement_error.csv 
+[2026-10-04 20:43:21] wrote results/smoke/tables/code_a_mc_table12_vs_paper.csv 
+[2026-10-04 20:44:35]   Table 20 / Figures 9-10 finished in 74.9 s 
+[2026-10-04 20:44:35] wrote results/smoke/tables/code_a_mc_table20_gmm.csv 
+[2026-10-04 20:44:35] wrote results/smoke/tables/code_a_mc_gmm_optimal_weights_true.csv 
+[2026-10-04 20:44:35] wrote results/smoke/tables/code_a_mc_table20_vs_paper.csv 
+[2026-10-04 20:44:35] wrote results/smoke/figures/code_a_fig09_gmm_estimates.pdf, results/smoke/figures/code_a_fig10_gmm_variances.pdf 
+[2026-10-04 20:44:35] 04_run_monte_carlo: done 
+[2026-10-04 20:44:42] 04_run_monte_carlo: mode = full, experiments = e1,t6,t7,t12,g, cores = 7 
+[2026-10-04 20:44:44]   Tables 4-5 finished in 1.6 s 
+[2026-10-04 20:44:44] wrote results/tables/code_a_mc_table04_05_estimators.csv 
+[2026-10-04 20:44:44] wrote results/tables/code_a_mc_table04_05_vs_paper.csv 
+[2026-10-04 20:44:48]   Table 6 finished in 4.5 s 
+[2026-10-04 20:44:48] wrote results/tables/code_a_mc_table06_byz_vs_ac.csv 
+[2026-10-04 20:44:48] wrote results/tables/code_a_mc_table06_vs_paper.csv 
+[2026-10-04 20:46:01]   Table 7 finished in 72.5 s 
+[2026-10-04 20:46:01] wrote results/tables/code_a_mc_table07_test_size_power.csv 
+[2026-10-04 20:46:01] wrote results/tables/code_a_mc_table07_vs_paper.csv 
+[2026-10-04 20:46:01] wrote results/figures/code_a_mc_power_curve.pdf 
+[2026-10-04 20:46:03]   Table 12 finished in 1.9 s 
+[2026-10-04 20:46:03] wrote results/tables/code_a_mc_table12_measurement_error.csv 
+[2026-10-04 20:46:03] wrote results/tables/code_a_mc_table12_vs_paper.csv 
+[2026-10-04 20:57:53]   Table 20 / Figures 9-10 finished in 709.9 s 
+[2026-10-04 20:57:53] wrote results/tables/code_a_mc_table20_gmm.csv 
+[2026-10-04 20:57:53] wrote results/tables/code_a_mc_gmm_optimal_weights_true.csv 
+[2026-10-04 20:57:53] wrote results/tables/code_a_mc_table20_vs_paper.csv 
+[2026-10-04 20:57:53] wrote results/figures/code_a_fig09_gmm_estimates.pdf, results/figures/code_a_fig10_gmm_variances.pdf 
+[2026-10-04 20:57:53] 04_run_monte_carlo: done 
+[2026-10-08 17:56:40] 02_prepare_data: measure = qmle_trade 
+[2026-10-08 17:56:41]   rebuilt panels identical to the recorded snapshot 
+[2026-10-08 17:56:41] DJ30 panel: 5019 dates, 2005-01-05 to 2025-01-14 
+[2026-10-08 17:56:41] Mag7 panel: 2698 dates, 2014-03-27 to 2025-01-14 
+[2026-10-08 17:56:41] wrote results/tables/code_a_data_summary.csv 
+[2026-10-08 17:56:41] 02_prepare_data: done 
+[2026-10-08 17:57:01] 03b_check_table01_se: start 
+[2026-10-08 17:57:09] wrote results/tables/code_a_table01_se_check.csv 
+[2026-10-08 17:57:09]   rounded matches: limit 23/25, author n=2000 N=5007 24/25, author n=2000 N=5008 25/25; max rel. truncation effect 2.9e-12 
+[2026-10-08 17:57:38] 03c_missing_day_sensitivity: start 
+[2026-10-08 17:57:41] wrote results/tables/code_a_missing_day_sensitivity.csv 
+[2026-10-08 17:57:41] wrote results/tables/code_a_missing_day_gaps.csv 
+[2026-10-08 17:58:53] 00_check_author_code: start 
+[2026-10-08 17:58:54]   author files ran: BYZestimator.R (H1hat = 0.1199), BYZinference.R (seeta = 0.0733) 
+[2026-10-08 17:59:18] wrote results/tables/code_a_author_code_comparison.csv 
+[2026-10-08 17:59:18] 00_check_author_code: done 
+[2026-10-08 17:59:18] 03b_check_table01_se: start 
+[2026-10-08 17:59:27] wrote results/tables/code_a_table01_se_check.csv 
+[2026-10-08 17:59:27]   rounded matches: limit 23/25, author n=2000 N=5007 24/25, author n=2000 N=5008 25/25; max rel. truncation effect 2.9e-12 
+[2026-10-08 17:59:27] 03c_missing_day_sensitivity: start 
+[2026-10-08 17:59:30] wrote results/tables/code_a_missing_day_sensitivity.csv 
+[2026-10-08 17:59:30] wrote results/tables/code_a_missing_day_gaps.csv 
+[2026-10-08 17:59:38] 03_estimate_parameters: mode = full 
+[2026-10-08 17:59:39] Table 1: n = 5007 increments, 2005-01-06 to 2025-01-14 
+[2026-10-08 17:59:46] wrote results/tables/code_a_table01_estimates.csv 
+[2026-10-08 17:59:46] wrote results/tables/code_a_table13_14_dj30.csv 
+[2026-10-08 17:59:50] wrote results/tables/code_a_time_reversibility_dj30.csv 
+[2026-10-08 17:59:50] wrote results/tables/code_a_time_reversibility_mag7.csv 
+[2026-10-08 17:59:50] wrote results/tables/code_a_time_reversibility_summary.csv 
+[2026-10-08 17:59:50] Reversibility: DJ30 rejected at 1%: 27 / 435 
+[2026-10-08 17:59:51] wrote results/tables/code_a_mag7_estimates.csv 
+[2026-10-08 17:59:51] wrote results/tables/code_a_original_vs_ours_empirical.csv 
+[2026-10-08 17:59:51] wrote results/tables/code_a_fig07_rolling_H_dj30.csv 
+[2026-10-08 17:59:51] wrote results/tables/code_a_fig08_rolling_H_mag7.csv 
+[2026-10-08 17:59:51] wrote results/figures/code_a_fig07_rolling_H_dj30.pdf 
+[2026-10-08 17:59:51] wrote results/figures/code_a_fig08_rolling_H_mag7.pdf 
+[2026-10-08 17:59:51] wrote results/figures/code_a_fig01_sample_paths.pdf 
+[2026-10-08 17:59:51] wrote results/figures/code_a_fig02_rho_max.pdf 
+[2026-10-08 17:59:51] wrote results/figures/code_a_fig03_admissible.pdf 
+[2026-10-08 17:59:51] 03_estimate_parameters: done 
+[2026-10-08 17:59:51] 04b_compare_mc_with_paper: mode = full 
+[2026-10-08 17:59:51] wrote results/tables/code_a_mc_agreement.csv 
+[2026-10-08 17:59:51] wrote results/tables/code_a_mc_agreement_summary.csv 
+[2026-10-08 17:59:51]   MC cells: 290 of 316 with |z| <= 2 (about 95% expected if both sides estimate the same quantity) 
+[2026-10-08 17:59:51]   asymptotic SE cells equal after rounding: 45 of 48 
+[2026-10-08 17:59:52] 04_run_monte_carlo: mode = smoke, experiments = e1,t6,t7,t12,g, cores = 7 
+[2026-10-08 17:59:53]   Tables 4-5 finished in 0.5 s 
+[2026-10-08 17:59:53] wrote results/smoke/tables/code_a_mc_table04_05_estimators.csv 
+[2026-10-08 17:59:53] wrote results/smoke/tables/code_a_mc_table04_05_vs_paper.csv 
+[2026-10-08 17:59:53]   Table 6 finished in 0.6 s 
+[2026-10-08 17:59:53] wrote results/smoke/tables/code_a_mc_table06_byz_vs_ac.csv 
+[2026-10-08 17:59:53] wrote results/smoke/tables/code_a_mc_table06_vs_paper.csv 
+[2026-10-08 17:59:56]   Table 7 finished in 2.9 s 
+[2026-10-08 17:59:56] wrote results/smoke/tables/code_a_mc_table07_test_size_power.csv 
+[2026-10-08 17:59:56] wrote results/smoke/tables/code_a_mc_table07_vs_paper.csv 
+[2026-10-08 17:59:56] wrote results/smoke/figures/code_a_mc_power_curve.pdf 
+[2026-10-08 17:59:57]   Table 12 finished in 0.3 s 
+[2026-10-08 17:59:57] wrote results/smoke/tables/code_a_mc_table12_measurement_error.csv 
+[2026-10-08 17:59:57] wrote results/smoke/tables/code_a_mc_table12_vs_paper.csv 
+[2026-10-08 18:00:57]   Table 20 / Figures 9-10 finished in 60.4 s 
+[2026-10-08 18:00:57] wrote results/smoke/tables/code_a_mc_table20_gmm.csv 
+[2026-10-08 18:00:57] wrote results/smoke/tables/code_a_mc_gmm_optimal_weights_true.csv 
+[2026-10-08 18:00:57] wrote results/smoke/tables/code_a_mc_table20_vs_paper.csv 
+[2026-10-08 18:00:57] wrote results/smoke/figures/code_a_fig09_gmm_estimates.pdf, results/smoke/figures/code_a_fig10_gmm_variances.pdf 
+[2026-10-08 18:00:57] wrote results/smoke/tables/code_a_mc_agreement.csv 
+[2026-10-08 18:00:57] wrote results/smoke/tables/code_a_mc_agreement_summary.csv 
+[2026-10-08 18:00:57] 04_run_monte_carlo: done 
+[2026-10-08 18:04:01] 00_check_author_code: start 
+[2026-10-08 18:04:02]   author files ran: BYZestimator.R (H1hat = 0.1199), BYZinference.R (seeta = 0.0733) 
+[2026-10-08 18:04:26] wrote results/tables/code_a_author_code_comparison.csv 
+[2026-10-08 18:04:27] 00_check_author_code: done 
+[2026-10-08 18:04:27] 02_prepare_data: measure = qmle_trade 
+[2026-10-08 18:04:28]   rebuilt panels identical to the recorded snapshot 
+[2026-10-08 18:04:28] DJ30 panel: 5019 dates, 2005-01-05 to 2025-01-14 
+[2026-10-08 18:04:28] Mag7 panel: 2698 dates, 2014-03-27 to 2025-01-14 
+[2026-10-08 18:04:28] wrote results/tables/code_a_data_summary.csv 
+[2026-10-08 18:04:28] 02_prepare_data: done 
+[2026-10-08 18:04:28] 03_estimate_parameters: mode = full 
+[2026-10-08 18:04:29] Table 1: n = 5007 increments, 2005-01-06 to 2025-01-14 
+[2026-10-08 18:04:36] wrote results/tables/code_a_table01_estimates.csv 
+[2026-10-08 18:04:36] wrote results/tables/code_a_table13_14_dj30.csv 
+[2026-10-08 18:04:41] wrote results/tables/code_a_time_reversibility_dj30.csv 
+[2026-10-08 18:04:41] wrote results/tables/code_a_time_reversibility_mag7.csv 
+[2026-10-08 18:04:41] wrote results/tables/code_a_time_reversibility_summary.csv 
+[2026-10-08 18:04:41] Reversibility: DJ30 rejected at 1%: 27 / 435 
+[2026-10-08 18:04:41] wrote results/tables/code_a_mag7_estimates.csv 
+[2026-10-08 18:04:41] wrote results/tables/code_a_original_vs_ours_empirical.csv 
+[2026-10-08 18:04:41] wrote results/tables/code_a_fig07_rolling_H_dj30.csv 
+[2026-10-08 18:04:41] wrote results/tables/code_a_fig08_rolling_H_mag7.csv 
+[2026-10-08 18:04:41] wrote results/figures/code_a_fig07_rolling_H_dj30.pdf 
+[2026-10-08 18:04:41] wrote results/figures/code_a_fig08_rolling_H_mag7.pdf 
+[2026-10-08 18:04:41] wrote results/figures/code_a_fig01_sample_paths.pdf 
+[2026-10-08 18:04:41] wrote results/figures/code_a_fig02_rho_max.pdf 
+[2026-10-08 18:04:41] wrote results/figures/code_a_fig03_admissible.pdf 
+[2026-10-08 18:04:41] 03_estimate_parameters: done 
+[2026-10-08 18:04:42] 03b_check_table01_se: start 
+[2026-10-08 18:04:49] wrote results/tables/code_a_table01_se_check.csv 
+[2026-10-08 18:04:49]   rounded matches: limit 23/25, author n=2000 N=5007 24/25, author n=2000 N=5008 25/25; max rel. truncation effect 2.9e-12 
+[2026-10-08 18:04:49] 03c_missing_day_sensitivity: start 
+[2026-10-08 18:04:53] wrote results/tables/code_a_missing_day_sensitivity.csv 
+[2026-10-08 18:04:53] wrote results/tables/code_a_missing_day_gaps.csv 
+[2026-10-08 18:04:53] 04b_compare_mc_with_paper: mode = full 
+[2026-10-08 18:04:53] wrote results/tables/code_a_mc_agreement.csv 
+[2026-10-08 18:04:53] wrote results/tables/code_a_mc_agreement_summary.csv 
+[2026-10-08 18:04:53]   MC cells: 290 of 316 with |z| <= 2 (about 95% expected if both sides estimate the same quantity) 
+[2026-10-08 18:04:53]   asymptotic SE cells equal after rounding: 45 of 48 
+[2026-10-08 18:04:53] 04_run_monte_carlo: mode = smoke, experiments = e1,t6,t7,t12,g, cores = 7 
+[2026-10-08 18:04:53]   Tables 4-5 finished in 0.5 s 
+[2026-10-08 18:04:53] wrote results/smoke/tables/code_a_mc_table04_05_estimators.csv 
+[2026-10-08 18:04:53] wrote results/smoke/tables/code_a_mc_table04_05_vs_paper.csv 
+[2026-10-08 18:04:54]   Table 6 finished in 0.6 s 
+[2026-10-08 18:04:54] wrote results/smoke/tables/code_a_mc_table06_byz_vs_ac.csv 
+[2026-10-08 18:04:54] wrote results/smoke/tables/code_a_mc_table06_vs_paper.csv 
+[2026-10-08 18:04:57]   Table 7 finished in 3.0 s 
+[2026-10-08 18:04:57] wrote results/smoke/tables/code_a_mc_table07_test_size_power.csv 
+[2026-10-08 18:04:57] wrote results/smoke/tables/code_a_mc_table07_vs_paper.csv 
+[2026-10-08 18:04:57] wrote results/smoke/figures/code_a_mc_power_curve.pdf 
+[2026-10-08 18:04:57]   Table 12 finished in 0.3 s 
+[2026-10-08 18:04:57] wrote results/smoke/tables/code_a_mc_table12_measurement_error.csv 
+[2026-10-08 18:04:57] wrote results/smoke/tables/code_a_mc_table12_vs_paper.csv 
+[2026-10-08 18:05:57]   Table 20 / Figures 9-10 finished in 59.7 s 
+[2026-10-08 18:05:57] wrote results/smoke/tables/code_a_mc_table20_gmm.csv 
+[2026-10-08 18:05:57] wrote results/smoke/tables/code_a_mc_gmm_optimal_weights_true.csv 
+[2026-10-08 18:05:57] wrote results/smoke/tables/code_a_mc_table20_vs_paper.csv 
+[2026-10-08 18:05:57] wrote results/smoke/figures/code_a_fig09_gmm_estimates.pdf, results/smoke/figures/code_a_fig10_gmm_variances.pdf 
+[2026-10-08 18:05:57] wrote results/smoke/tables/code_a_mc_agreement.csv 
+[2026-10-08 18:05:57] wrote results/smoke/tables/code_a_mc_agreement_summary.csv 
+[2026-10-08 18:05:57] 04_run_monte_carlo: done 

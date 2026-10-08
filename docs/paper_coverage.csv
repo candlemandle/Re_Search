@@ -1,0 +1,34 @@
+item,section,description,owner,status,script,outputs,match_with_paper,notes
+Figure 1,2,Sample paths of bivariate fBm H=(0.1;0.4) rho=0.8,A,reproduced,scripts/03_estimate_parameters.R,results/figures/code_a_fig01_sample_paths.pdf,qualitative (random draw),Same parameters; a different random path
+Figure 2,2,rho_max(H1;H2) heatmap,A,reproduced,scripts/03_estimate_parameters.R,results/figures/code_a_fig02_rho_max.pdf,exact (closed form),rho_max(0.2;0.8)=0.662 and rho_max(0.1;0.9)=0.383 as in text (unit test)
+Figure 3,2,Admissible (H1;H2) for rho=0.5/0.75/0.9,A,reproduced,scripts/03_estimate_parameters.R,results/figures/code_a_fig03_admissible.pdf,exact (closed form),
+Figure 4,4.1,Relative forecast weights as functions of H2,B,not_started,,,,
+Figure 5,4.1,Relative MSFE as functions of H2,B,not_started,,,,
+Figure 6,4.1,MSFE ratio vs dimension d (Prop. 4.3),B,not_started,,,,
+Figure 7,5.2,Rolling two-year H estimates (DJ30 subset),A,reproduced,scripts/03_estimate_parameters.R,results/figures/code_a_fig07_rolling_H_dj30.pdf; results/tables/code_a_fig07_rolling_H_dj30.csv,qualitative,Same pattern incl. convergence of H in 2017-2021; B uses it for subperiods
+Figure 8,F.3,Rolling two-year H estimates (Mag7),A,reproduced,scripts/03_estimate_parameters.R,results/figures/code_a_fig08_rolling_H_mag7.pdf; results/tables/code_a_fig08_rolling_H_mag7.csv,qualitative,
+Figure 9,G.3,Realized estimates rho_1 / rho^(2) / rho_opt over 1000 MC iterations,A,reproduced,scripts/04_run_monte_carlo.R g,results/figures/code_a_fig09_gmm_estimates.pdf,qualitative,
+Figure 10,G.3,n x variance of rho_lag (lags 1-10) / rho^(2) / rho_opt,A,reproduced,scripts/04_run_monte_carlo.R g,results/figures/code_a_fig10_gmm_variances.pdf; results/tables/code_a_mc_table20_gmm.csv,see Table 20,Asymptotic variances (45) added as dotted line
+Table 1,5.1,"H, rho, eta with asymptotic SEs for AAPL ALD AMGN AXP BA",A,reproduced_with_differences,scripts/03_estimate_parameters.R,results/tables/code_a_table01_estimates.csv,all 25 estimates equal at 4dp; 23/25 SEs (2 differ by 1e-4: authors' finite-sum SE formula gives 25/25),Common sample of the 5 stocks; Risk Lab qmle_trade; eta convention column in output; check: scripts/03b_check_table01_se.R
+Table 2,5.2,MSFE and MCS p-values fBm/bfBm/mfBm3-5 (3 periods),B,not_started,,,,
+Table 3,5.3,MSFE and MCS p-values HAR/VHAR2-5,B,not_started,,,,
+Table 4,E.1,MC bias/std/asym SE/RMSE rho=0,A,reproduced,scripts/04_run_monte_carlo.R e1,results/tables/code_a_mc_table04_05_estimators.csv; results/tables/code_a_mc_table04_05_vs_paper.csv,asymptotic SEs 22/24 equal after rounding; MC cells 66/72 within 2 combined MC SE,Criterion: scripts/04b_compare_mc_with_paper.R; full tables from the 2026-10-04 full run
+Table 5,E.1,MC bias/std/asym SE/RMSE rho=0.4,A,reproduced,scripts/04_run_monte_carlo.R e1,results/tables/code_a_mc_table04_05_estimators.csv; results/tables/code_a_mc_table04_05_vs_paper.csv,asymptotic SEs 23/24; MC cells 67/72 within 2 combined MC SE,see Table 4
+Table 6,E.1,BYZ vs Amblard-Coeurjolly estimators,A,reproduced_with_differences,scripts/04_run_monte_carlo.R t6,results/tables/code_a_mc_table06_byz_vs_ac.csv; results/tables/code_a_mc_table06_vs_paper.csv,MC cells 90/96 within 2 combined MC SE; AC rho bias at rho=0.2 n=500 differs (z=-5; unresolved),AC estimator identical to authors' estMFBM(i2; M=1..5; w=(1;0;0)) to machine precision (scripts/00_check_author_code.R)
+Table 7,E.2,Size and power of time-reversibility test,A,reproduced_with_differences,scripts/04_run_monte_carlo.R t7,results/tables/code_a_mc_table07_test_size_power.csv; results/tables/code_a_mc_table07_vs_paper.csv; results/figures/code_a_mc_power_curve.pdf,size OK; 26/32 cells within 2 combined MC SE; power 0.8-2.2 points higher at eta=0.3-0.4 (unresolved),Rates over replications with H_hat in (0;3/4) (_all columns: invalid = non-rejection; worse fit); eta=0.65 approximate circulant embedding
+Table 8,E.3,RMSFE bfBm vs fBm for rho=0/0.4/0.8,B,not_started,,,,
+Table 9,E.3,RMSFE for different (H1;H2),B,not_started,,,,
+Table 10,E.3,RMSFE fBm/bfBm/mfBm3/mfBm4,B,not_started,,,,
+Table 11,E.3,RMSFE with estimation error,B,not_started,,,,Can use estimate_mfbm() and simulate_mfbm() from Code A
+Table 12,E.4,Bias of BYZ under measurement error (noise),A,reproduced,scripts/04_run_monte_carlo.R t12,results/tables/code_a_mc_table12_measurement_error.csv; results/tables/code_a_mc_table12_vs_paper.csv,MC cells 30/32 within 2 combined MC SE (e.g. rho bias -0.244 vs -0.243),Noise N(0;2/72) on log IV; Delta=1/250
+Table 13,F.1,H and rho for 30 DJ stocks,A,reproduced_with_differences,scripts/03_estimate_parameters.R,results/tables/code_a_table13_14_dj30.csv,"70% of H and 57% of rho exact to 4 decimals; max |diff| 0.0105 (H JNJ), 0.0038 (rho)",Differences < 1 SE; see data/README.md (missing-day rules)
+Table 14,F.1,eta for 30 DJ stocks,A,reproduced_with_differences,scripts/03_estimate_parameters.R,results/tables/code_a_table13_14_dj30.csv,55% exact; max |diff| 0.0091,Same rules as Table 13
+Table 15,F.2.3,VHARF models,B,not_started,,,,
+Table 16,F.2.4,VLHAR models,B,not_started,,,,
+Table 17,F.3,Mag7 MSFE all model classes,B,not_started,,,,Data panel data/processed/mag7_logvol.csv from Code A
+Table 18,F.5,QLIKE DJ subset,B,not_started,,,,
+Table 19,F.5,QLIKE Mag7,B,not_started,,,,
+Table 20,G.3,Mean / n*Var / n*RMSE of rho_1 rho^(2) rho_opt rho_opt_boot,A,reproduced,scripts/04_run_monte_carlo.R g,results/tables/code_a_mc_table20_gmm.csv; results/tables/code_a_mc_table20_vs_paper.csv,11/12 cells within 2 combined MC SE; 10000-path variances of rho_1 / rho^(2): 0.78 / 1.20 vs paper 0.77 / 1.16,
+Test (11),3.3,Time-reversibility test on DJ30 pairs (text Section 5.1),A,reproduced,scripts/03_estimate_parameters.R,results/tables/code_a_time_reversibility_dj30.csv; results/tables/code_a_time_reversibility_summary.csv,counts as in the paper's procedure (unadjusted pairwise),27 of 435 pairs rejected at 1%; exploratory Holm/BH 3/8; non-rejection is not proof of eta=0 (noise; footnote 7)
+Theorems 3.1-3.3,3.3,"Asymptotic variances (9), (10), (14), (27)",A,reproduced,R/estimators.R,tests/testthat/test-estimators.R,limits equal Tables 4-5 parentheses in 45/48 cells after rounding; 2 of 3 others explained by authors' finite-sum formula; 1 inconsistent within the paper (0.3876 vs 0.3877),(27) and (14) checked against independent Isserlis computation; (10) uses log(1/Delta) as in the proof
+Author code,-,"Authors' R files BYZ.zip (Setup code.R, BYZestimator.R, BYZinference.R)",A,reproduced,scripts/00_check_author_code.R,author_code/BYZ/; results/tables/code_a_author_code_comparison.csv,"all three files run; estimators identical, SEs equal to 1e-5",Source https://fba.um.edu.mo/wp-content/uploads/2025/04/BYZ.zip (linked from arXiv v1). No code for data/empirical tables or forecasts is included
