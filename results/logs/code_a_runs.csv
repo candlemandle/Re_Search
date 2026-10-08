@@ -1,0 +1,8 @@
+"time","script","mode","r_version","platform","git_commit","code_modified","seed","md5_dj30","md5_mag7"
+"2026-10-08 18:04:27 MSK","00_check_author_code","full","R version 4.6.1 (2026-06-24)","aarch64-apple-darwin25.6.0","691c313",FALSE,20251003,"544fbd178444f5bff3c695c5cd69ead0","b3852bb24f4d3ea2eca73b1a1566bbab"
+"2026-10-08 18:04:28 MSK","02_prepare_data","full","R version 4.6.1 (2026-06-24)","aarch64-apple-darwin25.6.0","691c313",FALSE,20251003,"544fbd178444f5bff3c695c5cd69ead0","b3852bb24f4d3ea2eca73b1a1566bbab"
+"2026-10-08 18:04:41 MSK","03_estimate_parameters","full","R version 4.6.1 (2026-06-24)","aarch64-apple-darwin25.6.0","691c313",FALSE,20251003,"544fbd178444f5bff3c695c5cd69ead0","b3852bb24f4d3ea2eca73b1a1566bbab"
+"2026-10-08 18:04:49 MSK","03b_check_table01_se","full","R version 4.6.1 (2026-06-24)","aarch64-apple-darwin25.6.0","691c313",FALSE,20251003,"544fbd178444f5bff3c695c5cd69ead0","b3852bb24f4d3ea2eca73b1a1566bbab"
+"2026-10-08 18:04:53 MSK","03c_missing_day_sensitivity","full","R version 4.6.1 (2026-06-24)","aarch64-apple-darwin25.6.0","691c313",FALSE,20251003,"544fbd178444f5bff3c695c5cd69ead0","b3852bb24f4d3ea2eca73b1a1566bbab"
+"2026-10-08 18:04:53 MSK","04b_compare_mc_with_paper","full","R version 4.6.1 (2026-06-24)","aarch64-apple-darwin25.6.0","691c313",FALSE,20251003,"544fbd178444f5bff3c695c5cd69ead0","b3852bb24f4d3ea2eca73b1a1566bbab"
+"2026-10-08 18:05:57 MSK","04_run_monte_carlo e1,t6,t7,t12,g","smoke","R version 4.6.1 (2026-06-24)","aarch64-apple-darwin25.6.0","691c313",FALSE,20251003,"544fbd178444f5bff3c695c5cd69ead0","b3852bb24f4d3ea2eca73b1a1566bbab"

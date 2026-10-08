@@ -1,4 +1,4 @@
-"sample","pairs","rejected_1pct","rejected_5pct","share_rejected_1pct","share_rejected_5pct"
-"DJ30 (all 435 pairs)",435,27,66,0.0620689655172414,0.151724137931034
-"DJ30 Table 1 (10 pairs, common sample)",10,3,4,0.3,0.4
-"Mag7 (10 pairs)",10,1,1,0.1,0.1
+"sample","pairs","rejected_1pct","rejected_5pct","share_rejected_1pct","share_rejected_5pct","exploratory_rejected_holm_5pct","exploratory_rejected_bh_5pct","invalid_tests","interpretation"
+"DJ30 (all 435 pairs)",435,27,66,0.0620689655172414,0.151724137931034,3,8,0,"pairwise tests of the observed log-RV process; non-rejection is not evidence that eta = 0 holds, and noise biases eta_hat towards 0 (Table 12)"
+"DJ30 Table 1 (10 pairs, common sample)",10,3,4,0.3,0.4,2,3,0,"pairwise tests of the observed log-RV process; non-rejection is not evidence that eta = 0 holds, and noise biases eta_hat towards 0 (Table 12)"
+"Mag7 (10 pairs)",10,1,1,0.1,0.1,1,1,0,"pairwise tests of the observed log-RV process; non-rejection is not evidence that eta = 0 holds, and noise biases eta_hat towards 0 (Table 12)"
