@@ -100,4 +100,5 @@ out <- do.call(rbind, rows)
 rownames(out) <- NULL
 code_a_write(out, "code_a_author_code_comparison.csv")
 print(out[, c("check", "quantity", "author", "ours", "abs_diff")], digits = 4)
+code_a_log_run("00_check_author_code", "full", cfg)
 code_a_log("00_check_author_code: done")

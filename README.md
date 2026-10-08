@@ -27,14 +27,22 @@ Rscript -e 'install.packages("testthat")'
 | 1. download Risk Lab data (~20 MB) | `Rscript scripts/01_download_data.R` | ~2 min |
 | 2. build log-volatility panels | `Rscript scripts/02_prepare_data.R` | ~2 s |
 | 3. estimates, test, Figures 1–3, 7–8 | `Rscript scripts/03_estimate_parameters.R full` | ~15 s |
+| 3b. Table 1 standard errors, cell by cell | `Rscript scripts/03b_check_table01_se.R` | ~5 s |
+| 3c. missing-day rule sensitivity | `Rscript scripts/03c_missing_day_sensitivity.R` | ~30 s |
 | 4. Monte Carlo, smoke (outputs in `results/smoke/`) | `Rscript scripts/04_run_monte_carlo.R smoke` | ~1.5 min |
 | 4. Monte Carlo, full | `Rscript scripts/04_run_monte_carlo.R full` | ~15–25 min |
+| 4b. MC vs paper, cell-level criterion (no simulation) | `Rscript scripts/04b_compare_mc_with_paper.R full` | ~2 s |
 | tests | `Rscript -e 'testthat::test_dir("tests/testthat")'` | ~10 s |
 
 `scripts/04_run_monte_carlo.R full t7` runs a single experiment (`e1`, `t6`, `t7`, `t12`, `g`).
 The number of worker processes is `detectCores() - 1`, or `MFBM_CORES`. Results do not depend
 on it (fixed seed per chunk of 50 replications). The script relaunches itself with
 `OPENBLAS_NUM_THREADS=1` to avoid BLAS thread oversubscription in forked workers.
+
+Every run appends a provenance row (git commit, mode, R version, seed, data MD5) to
+`results/logs/code_a_runs.csv`. `scripts/02_prepare_data.R` will not overwrite the recorded
+data snapshot (`data/processed/MD5SUMS`) unless called with `--refresh-snapshot`.
+Review follow-up: `docs/response_to_review_A.md`.
 
 ## Code A: layout
 

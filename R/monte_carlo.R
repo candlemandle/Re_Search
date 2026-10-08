@@ -216,3 +216,121 @@ mc_gmm <- function(cfg, cores = code_a_cores()) {
     weights_true = gmm_weights(C_true)
   )
 }
+
+# ---------------------------------------------------------------------------
+# Cell-level agreement between our Monte Carlo tables and the paper
+# ---------------------------------------------------------------------------
+# For each cell: z = (ours - paper) / sqrt(se_ours^2 + se_paper^2), where both
+# Monte Carlo standard errors use the respective number of replications and
+# plug-in moments (paper sd when the paper reports it, otherwise ours):
+#   bias / mean     sd / sqrt(R)
+#   sd              sd / sqrt(2 (R - 1))                (normal approximation)
+#   rmse            sqrt(2 sd^4 + 4 bias^2 sd^2) / (2 rmse sqrt(R))  (delta method)
+#   n * variance    n var sqrt(2 / (R - 1));  sqrt(n * MSE) analogous to rmse
+#   rejection rate  sqrt(p (1 - p) / R)
+# Asymptotic standard errors are deterministic: agreement means equal after
+# rounding to the paper's 4 decimals. Cells share simulated paths (correlated)
+# and there are many of them, so about 5% of |z| > 2 is expected by chance;
+# the criterion is a screening device, not a joint test.
+PAPER_REPS <- c("Table 4" = 1000, "Table 5" = 1000, "Table 6" = 1000, "Table 7" = 5000,
+                "Table 12" = 1000, "Table 20" = 1000)
+
+mc_agreement <- function(tables_dir, ref_path = file.path("docs", "paper_values", "monte_carlo_reference.csv")) {
+  ref <- utils::read.csv(ref_path, stringsAsFactors = FALSE)
+  rd <- function(f) {
+    p <- file.path(tables_dir, f)
+    if (file.exists(p)) utils::read.csv(p, stringsAsFactors = FALSE) else NULL
+  }
+  key <- function(d) paste(d$table, d$method, d$n, d$delta, d$rho, d$eta, d$parameter)
+  out <- list()
+  se_rmse <- function(sd, bias, rmse, R) sqrt(2 * sd^4 + 4 * bias^2 * sd^2) / (2 * rmse * sqrt(R))
+
+  wide <- rbind(rd("code_a_mc_table04_05_estimators.csv")[, c("table", "method", "n", "delta", "rho", "eta",
+                                                              "reps", "parameter", "bias", "sd", "rmse", "asym_se")],
+                {
+                  w <- rbind(rd("code_a_mc_table06_byz_vs_ac.csv"), rd("code_a_mc_table12_measurement_error.csv"))
+                  if (!is.null(w)) {
+                    w$asym_se <- NA
+                    w[, c("table", "method", "n", "delta", "rho", "eta", "reps", "parameter", "bias", "sd", "rmse", "asym_se")]
+                  }
+                })
+  if (!is.null(wide)) {
+    for (m in c("bias", "sd", "rmse", "asym_se")) {
+      r <- ref[ref$metric == m, ]
+      w <- wide[!is.na(wide[[m]]), ]
+      idx <- match(key(r), key(w))
+      r <- r[!is.na(idx), ]; w <- w[idx[!is.na(idx)], ]
+      if (nrow(r) == 0) next
+      Rp <- PAPER_REPS[r$table]
+      # paper sd for the same cell when published (Tables 4-6), else ours
+      psd <- ref$paper_value[match(paste(key(r), "sd"), paste(key(ref), ref$metric))]
+      psd[is.na(psd)] <- w$sd[is.na(psd)]
+      se_o <- switch(m,
+        bias = w$sd / sqrt(w$reps),
+        sd = w$sd / sqrt(2 * (w$reps - 1)),
+        rmse = se_rmse(w$sd, w$bias, w$rmse, w$reps),
+        asym_se = rep(0, nrow(w)))
+      se_p <- switch(m,
+        bias = psd / sqrt(Rp),
+        sd = psd / sqrt(2 * (Rp - 1)),
+        rmse = se_rmse(psd, w$bias, w$rmse, Rp),
+        asym_se = rep(0, nrow(w)))
+      out[[length(out) + 1]] <- data.frame(r[, c("table", "method", "n", "delta", "rho", "eta", "parameter", "metric")],
+                                           ours = w[[m]], paper = r$paper_value, reps_ours = w$reps, reps_paper = Rp,
+                                           se_ours = se_o, se_paper = se_p)
+    }
+  }
+
+  t7 <- rd("code_a_mc_table07_test_size_power.csv")
+  if (!is.null(t7)) for (a in c("0.01", "0.05")) {
+    r <- ref[ref$metric == paste0("rejection_rate_", a), ]
+    k7 <- paste(t7$n, t7$eta); idx <- match(paste(r$n, r$eta), k7)
+    r <- r[!is.na(idx), ]; w <- t7[idx[!is.na(idx)], ]
+    if (nrow(r) == 0) next
+    valid_reps <- round(w$reps * (1 - w$share_invalid))
+    p_o <- w[[paste0("rejection_rate_", a)]]
+    out[[length(out) + 1]] <- data.frame(r[, c("table", "method", "n", "delta", "rho", "eta", "parameter", "metric")],
+                                         ours = p_o, paper = r$paper_value, reps_ours = valid_reps, reps_paper = 5000,
+                                         se_ours = sqrt(p_o * (1 - p_o) / valid_reps),
+                                         se_paper = sqrt(r$paper_value * (1 - r$paper_value) / 5000))
+  }
+
+  t20 <- rd("code_a_mc_table20_gmm.csv")
+  if (!is.null(t20) && any(ref$table == "Table 20")) {
+    t20$method[t20$method == "rho_lag1"] <- "rho_1"
+    r <- ref[ref$table == "Table 20" & ref$method %in% t20$method, ]
+    w <- t20[match(r$method, t20$method), ]
+    n <- r$n; R <- w$reps; v <- w$n_variance / n; bias <- w$mean - r$rho
+    nm <- r$metric
+    ours <- ifelse(nm == "mean", w$mean, ifelse(nm == "n_variance", w$n_variance, w$n_rmse))
+    se_fun <- function(RR) ifelse(nm == "mean", sqrt(v / RR),
+                           ifelse(nm == "n_variance", w$n_variance * sqrt(2 / (RR - 1)),
+                                  sqrt(n) * se_rmse(sqrt(v), bias, w$n_rmse / sqrt(n), RR)))
+    out[[length(out) + 1]] <- data.frame(r[, c("table", "method", "n", "delta", "rho", "eta", "parameter", "metric")],
+                                         ours = ours, paper = r$paper_value, reps_ours = R, reps_paper = 1000,
+                                         se_ours = se_fun(R), se_paper = se_fun(1000))
+  }
+
+  res <- do.call(rbind, out)
+  res$diff <- res$ours - res$paper
+  res$se_diff <- sqrt(res$se_ours^2 + res$se_paper^2)
+  det <- res$metric == "asym_se"
+  res$z <- ifelse(det, NA_real_, ifelse(res$se_diff > 0, res$diff / res$se_diff, ifelse(res$diff == 0, 0, Inf)))
+  # paper values are rounded to 4 decimals (Table 20: 2-3); rounding tolerance
+  tol <- ifelse(res$table == "Table 20", 0.005, 5e-5)
+  res$agree <- ifelse(det, abs(round(res$ours, 4) - res$paper) < 1e-9,
+                      abs(res$z) <= 2 | abs(res$diff) <= tol)
+  res$criterion <- ifelse(det, "equal after rounding to 4 decimals",
+                          "|z| <= 2 (or |diff| within paper rounding)")
+  res
+}
+
+mc_agreement_summary <- function(a) {
+  do.call(rbind, lapply(split(a, paste(a$table, a$metric == "asym_se")), function(d) {
+    data.frame(table = d$table[1],
+               cells = if (d$metric[1] == "asym_se") "asymptotic SE (deterministic)" else "Monte Carlo",
+               n_cells = nrow(d), n_agree = sum(d$agree), share_agree = mean(d$agree),
+               n_abs_z_gt_3 = sum(abs(d$z) > 3, na.rm = TRUE),
+               max_abs_z = if (all(is.na(d$z))) NA_real_ else max(abs(d$z), na.rm = TRUE))
+  }))
+}

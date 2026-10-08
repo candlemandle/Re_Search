@@ -280,3 +280,43 @@ test_that("Table 1 point estimates are reproduced on Risk Lab data", {
   expect_equal(round(est$eta["AAPL", "ALD"], 4), 0.0950)
   expect_true(all(est$H > 0 & est$H < 0.75))
 })
+
+# --- review follow-up: sign orientation, agreement criterion, data snapshot -------------
+
+test_that("signed eta keeps its orientation through the empirical pipeline", {
+  set.seed(31)
+  x <- simulate_mfbm(3000, c(0.1, 0.4), 0.4, 0.5, delta = 1 / 252)[[1]] # eta_{1,2} = +0.5, eq. (4)
+  lv <- increments_to_levels(x)
+  panel <- data.frame(date = as.Date("2000-01-03") + seq_len(nrow(lv)) - 1, B1 = lv[, 1], B2 = lv[, 2])
+  est <- estimate_panel(panel, 1 / 252, R = 2000L)
+  expect_gt(est$eta["B1", "B2"], 0.35)
+  expect_equal(est$eta["B2", "B1"], -est$eta["B1", "B2"])
+  tr <- time_reversibility_table(panel_increments(panel, c("B1", "B2"))$X, R = 2000L)
+  expect_equal(tr$eta, est$eta["B1", "B2"])
+  # the paper's table orientation: printed (8b) on (row, column) = eq. (4) eta of (column, row)
+  expect_equal(eta_mm(x[, 2], x[, 1], "printed"), eta_mm(x[, 1], x[, 2]))
+})
+
+test_that("Monte Carlo agreement criterion flags only differences beyond MC error", {
+  dir <- tempfile("mc"); dir.create(dir)
+  ref <- data.frame(table = "Table 7", method = "BYZ", n = 500, delta = "1/250", rho = 0.4,
+                    eta = c(0, 0.3), parameter = "eta", metric = "rejection_rate_0.05",
+                    paper_value = c(0.05, 0.80))
+  rp <- file.path(dir, "ref.csv"); utils::write.csv(ref, rp, row.names = FALSE)
+  t7 <- data.frame(table = "Table 7", n = 500, delta = "1/250", rho = 0.4, eta = c(0, 0.3), reps = 5000,
+                   rejection_rate_0.01 = NA, rejection_rate_0.05 = c(0.052, 0.86), share_invalid = 0)
+  utils::write.csv(t7, file.path(dir, "code_a_mc_table07_test_size_power.csv"), row.names = FALSE)
+  a <- mc_agreement(dir, rp)
+  expect_equal(nrow(a), 2)
+  se <- sqrt(0.052 * 0.948 / 5000 + 0.05 * 0.95 / 5000)
+  expect_equal(a$z[1], 0.002 / se)
+  expect_equal(a$agree, c(TRUE, FALSE))
+})
+
+test_that("processed data match the recorded snapshot checksums", {
+  sums <- file.path(code_a_root, "data", "processed", "MD5SUMS")
+  skip_if_not(file.exists(sums), "no recorded snapshot")
+  rec <- utils::read.table(sums, col.names = c("md5", "file"), stringsAsFactors = FALSE)
+  now <- tools::md5sum(file.path(code_a_root, "data", "processed", rec$file))
+  expect_equal(unname(now), rec$md5)
+})

@@ -35,8 +35,8 @@ Values are **annualized volatilities** (square root of annualized variance).
 ## Which measure the paper uses
 
 We use **`qmle_trade`** (Risk Lab's headline estimator). This was identified empirically:
-with `qmle_trade`, all 25 numbers of Table 1 (H, rho, eta and their standard errors) are
-reproduced to the 4th decimal; the 5- and 15-minute RVs give H lower by 0.05–0.11 and
+with `qmle_trade`, all 25 point estimates of Table 1 (H, rho, eta) are reproduced to the
+4th decimal (23 of the 25 standard errors as well; see `docs/response_to_review_A.md`, A1); the 5- and 15-minute RVs give H lower by 0.05–0.11 and
 rho lower by 0.08–0.17 (see `results/logs/code_a.log` and the PR notes).
 
 The modelled process is `B_t = log(vol_t)`. H, rho, eta and all their standard errors
@@ -85,14 +85,25 @@ no other filtering or outlier treatment.
 * **H, sigma^2** of a single series: increments between consecutive available days of that series.
 * **rho, eta** of a pair: increments on the dates where both series are observed.
 * **Table 1**: the five stocks are treated as one 5-dimensional mfBm on their common dates
-  (5008 dates, 5007 increments). This reproduces Table 1 exactly; estimating H on each
+  (5008 dates, 5007 increments). This reproduces the Table 1 point estimates; estimating H on each
   stock's own dates changes H by up to 0.002.
 * **Tables 13–14** (30 stocks): rules above. 70% of H, 57% of rho and 55% of eta values
   match the paper to 4 decimals; the largest deviations are 0.0105 (H of JNJ), 0.0038 (rho)
   and 0.0091 (eta), all below one standard error. The paper copies the five Table 1 values
   of H into Table 13 and appears to use the Table 1 common sample for pairs involving those
   five stocks (this hybrid rule raises the exact-match rate to 83%); we keep the simpler
-  pairwise rule.
+  pairwise rule. Which rule the paper used is not stated, so these are hypotheses; the
+  comparison of four rules is in `results/tables/code_a_missing_day_sensitivity.csv`
+  (`scripts/03c_missing_day_sensitivity.R`).
+* All rules collapse missing days: consecutive *available* observations are treated as one
+  sampling step Delta (a replication convention, not an exactly equally spaced model).
+
+## Snapshot
+
+The processed panels used for every reported result are fixed by `processed/MD5SUMS`; the raw
+files they were built from (downloaded 2026-10-04) are listed with size and MD5 in
+`raw_snapshot.csv`. `scripts/02_prepare_data.R` stops instead of overwriting the processed
+snapshot if a fresh download changes the panels; use `--refresh-snapshot` only deliberately.
 
 The dates on which a series is missing are listed by `n_obs` / `share_of_panel_dates` in
 `code_a_data_summary.csv` (V starts in March 2008; every other stock misses at most 43 days).

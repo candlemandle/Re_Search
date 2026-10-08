@@ -135,3 +135,36 @@ code_a_write <- function(df, name) {
   code_a_log("wrote ", path)
   invisible(path)
 }
+
+# MD5 checksums (base R, portable) of files, named by path.
+code_a_md5 <- function(paths) {
+  paths <- paths[file.exists(paths)]
+  stats::setNames(unname(tools::md5sum(paths)), paths)
+}
+
+# Append one provenance row per script run to results/logs/code_a_runs.csv:
+# time, script, mode, R version, git commit (+ uncommitted changes flag),
+# seed and checksums of the processed data snapshot.
+code_a_log_run <- function(script, mode, cfg = code_a_config(mode)) {
+  git <- function(...) {
+    out <- tryCatch(suppressWarnings(system2("git", c(...), stdout = TRUE, stderr = FALSE)),
+                    error = function(e) character())
+    if (length(out) == 0) NA_character_ else paste(out, collapse = " ")
+  }
+  dirty <- git("status", "--porcelain", "--", "R", "scripts")
+  md5 <- code_a_md5(file.path("data", "processed", c("dj30_logvol.csv", "mag7_logvol.csv")))
+  row <- data.frame(
+    time = format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z"), script = script, mode = mode,
+    r_version = R.version.string, platform = R.version$platform,
+    git_commit = git("rev-parse", "--short", "HEAD"),
+    code_modified = !is.na(dirty) && nzchar(dirty),
+    seed = cfg$seed,
+    md5_dj30 = unname(md5["data/processed/dj30_logvol.csv"]),
+    md5_mag7 = unname(md5["data/processed/mag7_logvol.csv"])
+  )
+  path <- file.path("results", "logs", "code_a_runs.csv")
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  utils::write.table(row, path, sep = ",", row.names = FALSE, append = file.exists(path),
+                     col.names = !file.exists(path))
+  invisible(row)
+}

@@ -145,4 +145,10 @@ if ("g" %in% todo) {
   grDevices::dev.off()
   code_a_log("wrote ", code_a_fig("code_a_fig09_gmm_estimates.pdf"), ", ", code_a_fig("code_a_fig10_gmm_variances.pdf"))
 }
+# cell-level comparison with the paper from the tables just written
+a <- mc_agreement(code_a_results("tables"))
+a$source_mode <- mode
+code_a_write(a, "code_a_mc_agreement.csv")
+code_a_write(cbind(mc_agreement_summary(a), source_mode = mode), "code_a_mc_agreement_summary.csv")
+code_a_log_run(paste("04_run_monte_carlo", paste(todo, collapse = ",")), mode, cfg)
 code_a_log("04_run_monte_carlo: done")

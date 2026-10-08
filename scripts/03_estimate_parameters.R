@@ -76,6 +76,12 @@ ref_se$asset2[is.na(ref_se$asset2)] <- ""
 t1$paper_se <- ref_se$paper_se[match(paste(t1$asset1, t1$asset2, t1$statistic),
                                      paste(ref_se$asset1, ref_se$asset2, ref_se$statistic))]
 t13 <- paper_lookup(t13)
+# eta sign convention (see eta_mm): eta_{asset1,asset2} as defined in eq. (4)/(26).
+# The paper's Table 1/14 cell in row = asset2, column = asset1 holds the same number
+# (printed (8b) applied to (row, column) equals eq. (4) eta of (column, row)).
+ETA_CONVENTION <- "eq4: eta_{asset1,asset2}; = paper Table 1/14 cell (row asset2, col asset1)"
+t1$eta_convention <- ifelse(t1$statistic == "eta", ETA_CONVENTION, "")
+t13$eta_convention <- ifelse(t13$statistic == "eta", ETA_CONVENTION, "")
 code_a_write(t1, "code_a_table01_estimates.csv")
 code_a_write(t13, "code_a_table13_14_dj30.csv")
 
@@ -95,6 +101,8 @@ tr_mag7 <- time_reversibility_table(panel_increments(mag7, tk7)$X, R = R)
 names(tr_mag7)[names(tr_mag7) == "reject_0.01"] <- "reject_1pct"
 names(tr_mag7)[names(tr_mag7) == "reject_0.05"] <- "reject_5pct"
 tr_dj30$valid <- NULL; tr_mag7$valid <- NULL
+tr_dj30$eta_convention <- "eq4: eta_{asset1,asset2}"
+tr_mag7$eta_convention <- "eq4: eta_{asset1,asset2}"
 code_a_write(tr_dj30, "code_a_time_reversibility_dj30.csv")
 code_a_write(tr_mag7, "code_a_time_reversibility_mag7.csv")
 tr_sum <- data.frame(
@@ -109,6 +117,17 @@ tr_sum$rejected_1pct[2] <- sum(tr5$reject_0.01)
 tr_sum$rejected_5pct[2] <- sum(tr5$reject_0.05)
 tr_sum$share_rejected_1pct <- tr_sum$rejected_1pct / tr_sum$pairs
 tr_sum$share_rejected_5pct <- tr_sum$rejected_5pct / tr_sum$pairs
+# The counts above are the paper's procedure: unadjusted, pairwise, two-sided tests.
+# They are not a calibrated global test of eta = 0 for the panel, and pairs share
+# assets, so the tests are dependent. As a separately labelled, exploratory addition,
+# Holm (FWER) and Benjamini-Hochberg (FDR) adjusted counts at 5% are reported.
+p_lists <- list(tr_dj30$p_value, tr5$p_value, tr_mag7$p_value)
+tr_sum$exploratory_rejected_holm_5pct <- vapply(p_lists[c(1, 2, 3)], function(p) sum(stats::p.adjust(p, "holm") < 0.05, na.rm = TRUE), 0)
+tr_sum$exploratory_rejected_bh_5pct <- vapply(p_lists[c(1, 2, 3)], function(p) sum(stats::p.adjust(p, "BH") < 0.05, na.rm = TRUE), 0)
+tr_sum$invalid_tests <- vapply(p_lists, function(p) sum(is.na(p)), 0)
+tr_sum$interpretation <- paste("pairwise tests of the observed log-RV process; non-rejection is not evidence",
+                               "that eta = 0 holds, and noise biases eta_hat towards 0 (Table 12)")
+tr_sum <- tr_sum[c(1, 2, 3), ]
 code_a_write(tr_sum, "code_a_time_reversibility_summary.csv")
 code_a_log(sprintf("Reversibility: DJ30 rejected at 1%%: %d / %d", sum(tr_dj30$reject_1pct), nrow(tr_dj30)))
 
@@ -189,4 +208,5 @@ for (r in c(0.5, 0.75, 0.9)) {
 }
 grDevices::dev.off()
 code_a_log("wrote ", code_a_fig("code_a_fig03_admissible.pdf"))
+code_a_log_run("03_estimate_parameters", mode, cfg)
 code_a_log("03_estimate_parameters: done")

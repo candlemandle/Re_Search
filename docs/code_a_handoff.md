@@ -19,22 +19,31 @@ Only results accepted by the reviewer should go on slides. All numbers below com
 6. Monte Carlo shows small bias and that the asymptotic SEs match the simulated ones; the new
    eta estimator is far more accurate than the older Amblard–Coeurjolly estimator.
 7. On 20 years of DJ30 data the estimated H are 0.14–0.25, correlations of increments
-   0.2–0.77, and eta is not significantly different from 0 for most pairs, which justifies
-   the time-reversible mfBm used for forecasting (Code B).
+   0.2–0.77, and for most pairs the individual test does not reject eta = 0. The forecasting
+   part (Code B) therefore *maintains* eta = 0 as a modelling assumption; the tests support it
+   only partially (see the caveats below), they do not prove it.
 
 ## Two main results
 
-1. **Exact empirical replication of Table 1.** With Risk Lab `qmle_trade` volatility and the
-   five stocks' common sample, all 25 estimates and all 25 standard errors match the paper
-   to the 4th decimal (e.g. H_AAPL = 0.2609 (0.0123), rho_AAPL,ALD = 0.3902 (0.0131),
-   eta_AAPL,ALD = 0.0950 (0.0322)). Tables 13–14 (30 stocks) match within < 1 SE.
-2. **The simulation evidence of the paper is reproduced.** Asymptotic SEs (Tables 4–5,
-   parentheses) are reproduced exactly; MC bias/SD/RMSE, the BYZ-vs-AC comparison (Table 6),
-   the size and power of the test (Table 7) and the noise bias (Table 12: rho biased by
-   −0.24, eta by −0.37) agree within Monte Carlo error.
+1. **Empirical replication of Table 1.** With Risk Lab `qmle_trade` volatility and the
+   five stocks' common sample, all 25 point estimates match the paper to the 4th decimal
+   (e.g. H_AAPL = 0.2609, rho_AAPL,ALD = 0.3902, eta_AAPL,ALD = 0.0950); 23 of 25 standard
+   errors match at 4 decimals, the other two differ by 1 in the 4th decimal (0.03225 vs 0.0322,
+   0.03256 vs 0.0325) — explained by the authors computing the SEs with truncated finite sums
+   (their own code reproduces 25/25). Tables 13–14 (30 stocks): differences below 1 SE.
+2. **The simulation evidence of the paper is reproduced, with named exceptions.**
+   45 of 48 asymptotic SEs in Tables 4–5 equal the paper after rounding. Of 316 Monte Carlo
+   cells (Tables 4–7, 12, 20), 290 (92%) differ from the paper by at most 2 combined MC
+   standard errors (about 95% would be expected by chance alone). The qualitative findings all
+   hold: small bias, asymptotic SEs close to simulated SDs, BYZ eta far better than
+   Amblard–Coeurjolly, correct test size, noise biases rho by −0.24 and eta by −0.37.
+   Exceptions: test power at eta = 0.3–0.4 is 1–2 points higher than in the paper, one AC
+   bias cell differs (see `docs/response_to_review_A.md`).
 
 Time-reversibility on real data: 27 of 435 DJ30 pairs are rejected at 1% (6.2%), 66 at 5%;
-1 of 10 Mag7 pairs at 1%. Most pairs are consistent with eta = 0, as the paper states.
+3 of the 10 Table 1 pairs and 1 of 10 Mag7 pairs at 1%. These are individual pairwise tests
+(dependent, not a joint test of the whole panel): non-rejection for most pairs is compatible
+with eta = 0 but does not establish it — noise pushes eta_hat towards zero and lowers power.
 
 ## Main limitation
 
@@ -48,7 +57,7 @@ noise biases rho and eta towards zero (Table 12, rho 0.4 → 0.16) and H downwar
   Amblard–Coeurjolly convention; the paper's own definition (eq. (4), Appendix C.2) has the
   opposite sign. Same numbers, opposite labels. The test is unaffected.
 * **Which RV?** The paper does not say which Risk Lab series it uses; we identified it
-  (`qmle_trade`, the noise-robust QMLE estimator) by matching Table 1 exactly. 5-minute RV
+  (`qmle_trade`, the noise-robust QMLE estimator) by matching all Table 1 point estimates. 5-minute RV
   gives clearly lower H and rho.
 * **Author code.** The authors' three R files (`author_code/BYZ`) run; their estimators and
   standard errors coincide with ours to machine precision / 1e-5.

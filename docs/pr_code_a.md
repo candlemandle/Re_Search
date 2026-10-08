@@ -1,5 +1,7 @@
 # PR: Code A — data, mfBm covariance structure, estimators, test, Monte Carlo
 
+> Updated after the first review: see `docs/response_to_review_A.md`.
+
 Reviewer: participant 5. Branch: `code-a`.
 
 ## Команды запуска
@@ -63,15 +65,17 @@ Tests ~10 s. Dependencies: R ≥ 4.3, `testthat`; everything else is base R.
 
 ## Что совпало с оригиналом
 
-* **Table 1: exact.** All 25 estimates and 25 asymptotic SEs equal the paper to 4 decimals.
-* **Asymptotic SEs of Tables 4–5 (parentheses): exact**, and the closed forms (14), (27) agree
-  with an independent Isserlis computation; also equal to the authors' `BYZinference.R` to 1e-5.
+* **Table 1:** all 25 point estimates equal the paper at 4 decimals; 23/25 SEs do, two differ by 1
+  in the 4th decimal (authors' finite-sum SE formula reproduces 25/25; `scripts/03b_check_table01_se.R`).
+* **Asymptotic SEs of Tables 4–5 (parentheses):** 45/48 equal after rounding; the closed forms
+  (14), (27) agree with an independent Isserlis computation and with the authors'
+  `BYZinference.R` to 1e-5 (relative 1e-4).
 * **Author code:** our MM estimators equal `BYZestimator.R` on the same path (H, sigma^2, rho to
   machine precision); our AC estimator equals their `estMFBM(i2, M = 1..5, w = (1, 0, 0))`.
-* **Monte Carlo (Tables 4–7, 12, 20):** all within Monte Carlo error, e.g.
-  Table 12 noise bias rho −0.2436 vs −0.2430, eta −0.3687 vs −0.3687;
-  Table 6 AC eta bias at eta = 0: 0.304 vs 0.308; Table 7 size at 5%: 0.052 vs 0.058 (n = 500);
-  Table 20 n·Var(rho_opt) 0.66 vs 0.65.
+* **Monte Carlo (Tables 4–7, 12, 20):** 290 of 316 cells within 2 combined MC standard errors
+  of the paper (criterion and exceptions: `results/tables/code_a_mc_agreement*.csv`,
+  `docs/response_to_review_A.md`); e.g. Table 12 noise bias rho −0.2436 vs −0.2430;
+  Table 6 AC eta bias at eta = 0: 0.304 vs 0.308; Table 20 n·Var(rho_opt) 0.66 vs 0.65.
 * Figures 1–3, 7–8 reproduce the paper's figures (Figure 7 incl. the 2017–2021 convergence).
 * rho_max(0.2, 0.8) = 0.662 and rho_max(0.1, 0.9) = 0.383 as quoted in Section 2.
 
@@ -104,7 +108,7 @@ Tests ~10 s. Dependencies: R ≥ 4.3, `testthat`; everything else is base R.
 
 ## Какие тесты проходят
 
-`tests/testthat/test-estimators.R`: 27 tests / 113 expectations, all pass. They cover
+`tests/testthat/test-estimators.R`: 30 test blocks, all pass (3 added after review). They cover
 covariance symmetry/PD, consistency of level and increment covariances, rho_max values,
 admissibility boundary, simulator vs target covariance and vs Cholesky, near-boundary fallback,
 seed reproducibility, estimator recovery and admissible ranges, scale invariance, eta sign
