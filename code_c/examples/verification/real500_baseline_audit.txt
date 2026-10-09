@@ -1,0 +1,5 @@
+Scope: isolated C baseline, mfOU fitting intentionally disabled after baseline calculation.
+Real DJ30 origin index4100, dimension5, window500 contains ALD gap4078 and AMGN gaps3797/3869.
+Direct reviewed B public-run parity: keys, forecast, actual, train_start, n_train_days and calendar agree within1e-12.
+Future non-target missingness invariance: C and B keys/predictions unchanged.
+Missing actual at h5: both retain h1/h20 and drop h5; targets stay t+h.

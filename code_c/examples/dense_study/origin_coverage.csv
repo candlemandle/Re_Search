@@ -1,0 +1,9 @@
+"dimension","window","year","reason","n_audit_rows","n_distinct_origins"
+1,500,"2019","paired_realized",2016,252
+1,500,"2020","paired_realized",2016,252
+1,500,"2021","asset_missing_at_origin",1,1
+1,500,"2021","paired_realized",1968,246
+2,500,"2019","paired_realized",2016,252
+2,500,"2020","paired_realized",2016,252
+2,500,"2021","asset_missing_at_origin",1,1
+2,500,"2021","paired_realized",1968,246

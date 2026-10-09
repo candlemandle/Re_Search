@@ -1,0 +1,16 @@
+# Run from the repository root. Only the C-owned folder is required as overlay.
+args <- commandArgs(trailingOnly=TRUE)
+ab_root <- if(length(args)) args[1] else if(dir.exists("part B version 2/R")) "part B version 2" else "."
+options(code_c.root=normalizePath("code_c"))
+library_path<-Sys.getenv("CODE_C_TEST_LIBRARY","code_c/.Rlib")
+if(dir.exists(library_path)) .libPaths(c(normalizePath(library_path),.libPaths()))
+if (!requireNamespace("testthat",quietly=TRUE)) stop("Install testthat or restore the project's pinned test environment first")
+for (f in sort(list.files("code_c/R",pattern="[.]R$",full.names=TRUE))) source(f)
+c2_load_ab(ab_root)
+res<-testthat::test_dir("code_c/tests",reporter="summary",stop_on_failure=FALSE)
+tab<-as.data.frame(res)
+out<-Sys.getenv("CODE_C_TEST_OUTPUT","results/code_c_v2/verification")
+dir.create(out,recursive=TRUE,showWarnings=FALSE)
+write.csv(tab[,setdiff(names(tab),"result"),drop=FALSE],file.path(out,"test_results.csv"),row.names=FALSE)
+if(any(tab$failed>0|tab$error|tab$warning>0)) stop("Code C tests failed or warned; inspect test_results.csv")
+cat("Code C:",nrow(tab),"test blocks,",sum(tab$passed),"expectations passed.\n")

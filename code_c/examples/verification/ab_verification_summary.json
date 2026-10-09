@@ -1,0 +1,12 @@
+{
+  "test_blocks": 66,
+  "expectations": 275,
+  "failed_expectations": 0,
+  "errors": 0,
+  "warnings": 0,
+  "skipped_blocks": 0,
+  "test_exit_status": 0,
+  "healthy_pinned_packages": 43,
+  "protected_original_identities_unchanged": 160,
+  "copied_source_identities_unchanged": 124
+}

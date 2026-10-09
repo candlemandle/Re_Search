@@ -1,0 +1,19 @@
+list(mode = "study", seed = 20261009L, delta = 0.00396825396825397, 
+    window = 500L, horizons = c(1L, 2L, 3L, 4L, 5L, 10L, 15L, 
+    20L), assets = c("AAPL", "ALD", "AMGN", "AXP", "BA"), sets = list(
+        "AAPL", c("AAPL", "ALD"), c("AAPL", "ALD", "AMGN"), c("AAPL", 
+        "ALD", "AMGN", "AXP"), c("AAPL", "ALD", "AMGN", "AXP", 
+        "BA")), sensitivity_windows = c(250L, 1000L), calendar = "trading", 
+    min_window_coverage = 0.9, start = structure(13516, class = "Date"), 
+    end = structure(20102, class = "Date"), smoke_origins = 3L, 
+    study_start = structure(17898, class = "Date"), study_end = structure(18992, class = "Date"), 
+    study_step = 21L, sim_n = 500L, sim_reps = 30L, sim_delta = 0.004, 
+    bootstrap_reps = 2000L, bootstrap_block_days = 20L, min_bootstrap_blocks = 10L, 
+    quadrature = 128L, fit_quadrature = 64L, selection_targets = c("AAPL", 
+    "MSFT", "JPM"), selection_universe = c("AAPL", "ALD", "AMGN", 
+    "AXP", "BA", "BEL", "CAT", "CHV", "CRM", "CSCO", "DIS", "GS", 
+    "HD", "IBM", "INTC", "JNJ", "JPM", "KO", "MCD", "MMM", "MRK", 
+    "MSFT", "NIKE", "PG", "SPC", "UNH", "V", "WAG", "WMT", "XOM"
+    ), selection_k = 4L, selection_fixed = list(AAPL = c("ALD", 
+    "AMGN", "AXP", "BA"), MSFT = c("AAPL", "ALD", "AMGN", "AXP"
+    ), JPM = c("AAPL", "ALD", "AMGN", "AXP")))

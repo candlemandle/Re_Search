@@ -1,0 +1,24 @@
+"file","context","test","nb","failed","skipped","error","warning","user","system","real","passed"
+"test-experiments.R","experiments","mfBm baseline is the reviewed B trading predictor, even with a gap",5,0,FALSE,FALSE,0,0.545,0.025,0.578,5
+"test-experiments.R","experiments","missing targets are dropped jointly, failures stay visible",3,0,FALSE,FALSE,0,0.0760000000000001,0.00699999999999999,0.0840000000000001,3
+"test-experiments.R","experiments","checkpoint resume is exact and changed data invalidates identity",3,0,FALSE,FALSE,0,0.112,0.013,0.127,3
+"test-experiments.R","experiments","smoke uncertainty is unavailable and losses pair exact keys",4,0,FALSE,FALSE,0,0.067,0.004,0.0720000000000001,4
+"test-experiments.R","experiments","reports handle a missing paper subperiod without fabricating rows",2,0,FALSE,FALSE,0,0.0309999999999999,0.002,0.0310000000000001,2
+"test-experiments.R","experiments","CLI plan honors prespecified dimensions and paths with spaces",3,0,FALSE,FALSE,0,0.006,0.002,0.53,3
+"test-experiments.R","experiments","daily bootstrap preserves missing pair positions on the trading grid",5,0,FALSE,FALSE,0,0.022,0.003,0.0249999999999999,5
+"test-experiments.R","experiments","all failed mfOU fits still produce a usable failure report",3,0,FALSE,FALSE,0,0.135,0.00799999999999999,0.143,3
+"test-experiments.R","experiments","nested information sets share B's largest-set eligibility calendar",6,0,FALSE,FALSE,0,0.226,0.017,0.245,6
+"test-experiments.R","experiments","C baseline agrees with B's public multi-model runner",6,0,FALSE,FALSE,0,0.292,0.019,0.313,6
+"test-experiments.R","experiments","a refreshed failed run cannot retain previous scientific figures",2,0,FALSE,FALSE,0,0.0180000000000002,0.00900000000000001,0.0270000000000001,2
+"test-mfou.R","mfou","stationary covariance has the analytic multivariate OU limit",2,0,FALSE,FALSE,0,0.004,0.001,0.00499999999999989,2
+"test-mfou.R","mfou","rough covariance agrees with independent exponential integrals",6,0,FALSE,FALSE,0,0.0579999999999998,0.002,0.0619999999999998,6
+"test-mfou.R","mfou","Gaussian conditioning uses history and log-normal adjustment",4,0,FALSE,FALSE,0,0.00800000000000001,0.002,0.0100000000000002,4
+"test-mfou.R","mfou","population moments identify interior mfOU parameters",5,0,FALSE,FALSE,0,0.0900000000000003,0.00799999999999998,0.112,5
+"test-mfou.R","mfou","cached moment design retains gaps and exact pair multiplicities",3,0,FALSE,FALSE,0,0.00700000000000012,0.002,0.0089999999999999,3
+"test-selection.R","selection","asset selection uses reviewed calendar predictions without future inputs",4,0,FALSE,FALSE,0,0.24,0.013,0.261,4
+"test-selection.R","selection","window sensitivity compares losses only on intersected forecast keys",3,0,FALSE,FALSE,0,0.0150000000000001,0.003,0.0179999999999998,3
+"test-simulation.R","simulation","simulation keeps oracle applicability and exact paired outcomes visible",45,0,FALSE,FALSE,0,1.662,0.072,1.803,45
+"test-simulation.R","simulation","Monte Carlo errors use replication-level squared losses and paired keys",12,0,FALSE,FALSE,0,0.0309999999999997,0.002,0.0330000000000004,12
+"test-simulation.R","simulation","source or configuration changes invalidate simulation checkpoint identity",3,0,FALSE,FALSE,0,0.0110000000000001,0.005,0.0149999999999997,3
+"test-simulation.R","simulation","conditioning failures retain fitted diagnostics without replacing forecasts",7,0,FALSE,FALSE,0,0.558,0.023,0.62,7
+"test-simulation.R","simulation","failed replications and undefined parameter truth remain visible in summaries",9,0,FALSE,FALSE,0,0.0539999999999994,0.00800000000000001,0.069,9
