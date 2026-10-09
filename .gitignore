@@ -7,3 +7,5 @@ data/raw/
 .Rproj.user/
 .DS_Store
 results/smoke/
+.venv/
+results/code_c_v2/

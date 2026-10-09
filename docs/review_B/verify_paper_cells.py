@@ -3,14 +3,24 @@
 Extracts Tables 2, 3, 15-19 directly from the article PDF (PyMuPDF text layer),
 parses every model row (8 loss values + 8 MCS p-values) and compares each cell
 with docs/paper_values/code_b_forecast_tables.csv.
-Usage (from project root): python3 -I docs/review_B/verify_paper_cells.py
+Usage (from project root):
+  python3 -I docs/review_B/verify_paper_cells.py [path/to/article.pdf]
+
+If no argument is supplied, PAPER_PDF is used when set, otherwise the historical
+project-root filename is tried.
 Writes docs/review_B/paper_cells_check.csv and docs/review_B/paper_text.txt.
 """
 import csv, re, sys, os
-import fitz
+try:
+    import pymupdf as fitz
+except ImportError:  # PyMuPDF versions before the pymupdf import name
+    import fitz
 
 ROOT = os.getcwd()
-pdf = os.path.join(ROOT, "04_Bibinger_Yu_Zhang_2026_JBES.pdf")
+pdf = (sys.argv[1] if len(sys.argv) > 1 else
+       os.environ.get("PAPER_PDF", os.path.join(ROOT, "04_Bibinger_Yu_Zhang_2026_JBES.pdf")))
+if not os.path.isfile(pdf):
+    raise SystemExit(f"Article PDF not found: {pdf}")
 doc = fitz.open(pdf)
 text = "".join(f"\n===== PAGE {i + 1}\n" + p.get_text() for i, p in enumerate(doc))
 open(os.path.join(ROOT, "docs/review_B/paper_text.txt"), "w").write(text)
